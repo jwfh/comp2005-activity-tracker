@@ -1,5 +1,5 @@
 \hypertarget{classcom_1_1activitytracker_1_1_activity_tracker}{}\section{com.\+activitytracker.\+Activity\+Tracker Class Reference}
-\label{classcom_1_1activitytracker_1_1_activity_tracker}\index{com.\+activitytracker.\+Activity\+Tracker@{com.\+activitytracker.\+Activity\+Tracker}}
+\label{classcom_1_1activitytracker_1_1_activity_tracker}\index{com.activitytracker.ActivityTracker@{com.activitytracker.ActivityTracker}}
 
 
 Collaboration diagram for com.\+activitytracker.\+Activity\+Tracker\+:
@@ -26,8 +26,8 @@ Definition at line 28 of file Activity\+Tracker.\+java.
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_activity_tracker_a29cfd2975a07afe34e2a3112cbf32dc8}\label{classcom_1_1activitytracker_1_1_activity_tracker_a29cfd2975a07afe34e2a3112cbf32dc8}} 
-\index{com\+::activitytracker\+::\+Activity\+Tracker@{com\+::activitytracker\+::\+Activity\+Tracker}!main@{main}}
-\index{main@{main}!com\+::activitytracker\+::\+Activity\+Tracker@{com\+::activitytracker\+::\+Activity\+Tracker}}
+\index{com.activitytracker.ActivityTracker@{com.activitytracker.ActivityTracker}!main@{main}}
+\index{main@{main}!com.activitytracker.ActivityTracker@{com.activitytracker.ActivityTracker}}
 \subsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily static void com.\+activitytracker.\+Activity\+Tracker.\+main (\begin{DoxyParamCaption}\item[{final String \mbox{[}$\,$\mbox{]}}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
@@ -36,45 +36,45 @@ The main program entry point.
 Definition at line 33 of file Activity\+Tracker.\+java.
 
 
-\begin{DoxyCode}
-33                                                  \{
-34 
-35         \textcolor{comment}{// Create singleton instance of DBManager}
-36         DBManager dbManager = \textcolor{keyword}{new} DBManager();
-37         \textcolor{keywordflow}{if} (!dbManager.init(\textcolor{stringliteral}{"data.db"})) \{
-38             System.err.println(\textcolor{stringliteral}{"Failed to initialize DBManager"});
-39             System.exit(1);
-40         \}
-41 
-42         \textcolor{comment}{// Set Look and Feel}
-43         \textcolor{keywordflow}{try} \{
-44             UIManager.setLookAndFeel(\textcolor{keyword}{new} MaterialLookAndFeel());
-45         \}
-46         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} UnsupportedLookAndFeelException e) \{
-47             e.printStackTrace();
-48         \}
-49         \textcolor{comment}{// Get desktop resolution of default monitor (in case of multi-monitor setups)}
-50         \textcolor{keyword}{final} GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(
-      );
-51 
-52         \textcolor{keyword}{final} JFrame frame = \textcolor{keyword}{new} JFrame(\textcolor{stringliteral}{"Activity Logger"});
-53 
-54         \textcolor{keyword}{final} String logoPath = \textcolor{stringliteral}{"./assets/logo.png"};
-55         ImageIcon imgIcon = \textcolor{keyword}{new} ImageIcon(ActivityTracker.class.getResource(logoPath));
-56         frame.setIconImage(imgIcon.getImage());
-57         frame.setContentPane(\textcolor{keyword}{new} LoginWindow((\textcolor{keyword}{final} User user) -> \{
-58             frame.setContentPane(\textcolor{keyword}{new} MainWindow(dbManager, user).rootPanel());
-59             frame.validate();
-60             frame.repaint();
-61         \}, dbManager).rootPanel());
-62         frame.setDefaultCloseOperation(JFrame.EXIT\_ON\_CLOSE);
-63         frame.pack();
-64 
-65         \textcolor{comment}{// Set window size to be 1/2 of screen dimensions}
-66         frame.setSize(gd.getDisplayMode().getWidth() * 2/3 , gd.getDisplayMode().getHeight() * 2/3);
-67         frame.setLocationRelativeTo(null); \textcolor{comment}{// Center window}
-68         frame.setVisible(\textcolor{keyword}{true});
-69     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{33                                                  \{}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35         \textcolor{comment}{// Create singleton instance of DBManager}}
+\DoxyCodeLine{36         DBManager dbManager = \textcolor{keyword}{new} DBManager();}
+\DoxyCodeLine{37         \textcolor{keywordflow}{if} (!dbManager.init(\textcolor{stringliteral}{"data.db"})) \{}
+\DoxyCodeLine{38             System.err.println(\textcolor{stringliteral}{"Failed to initialize DBManager"});}
+\DoxyCodeLine{39             System.exit(1);}
+\DoxyCodeLine{40         \}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \textcolor{comment}{// Set Look and Feel}}
+\DoxyCodeLine{43         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{44             UIManager.setLookAndFeel(\textcolor{keyword}{new} MaterialLookAndFeel());}
+\DoxyCodeLine{45         \}}
+\DoxyCodeLine{46         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} UnsupportedLookAndFeelException e) \{}
+\DoxyCodeLine{47             e.printStackTrace();}
+\DoxyCodeLine{48         \}}
+\DoxyCodeLine{49         \textcolor{comment}{// Get desktop resolution of default monitor (in case of multi-monitor setups)}}
+\DoxyCodeLine{50         \textcolor{keyword}{final} GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52         \textcolor{keyword}{final} JFrame frame = \textcolor{keyword}{new} JFrame(\textcolor{stringliteral}{"Activity Logger"});}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54         \textcolor{keyword}{final} String logoPath = \textcolor{stringliteral}{"./assets/logo.png"};}
+\DoxyCodeLine{55         ImageIcon imgIcon = \textcolor{keyword}{new} ImageIcon(ActivityTracker.class.getResource(logoPath));}
+\DoxyCodeLine{56         frame.setIconImage(imgIcon.getImage());}
+\DoxyCodeLine{57         frame.setContentPane(\textcolor{keyword}{new} LoginWindow((\textcolor{keyword}{final} User user) -> \{}
+\DoxyCodeLine{58             frame.setContentPane(\textcolor{keyword}{new} MainWindow(dbManager, user).rootPanel());}
+\DoxyCodeLine{59             frame.validate();}
+\DoxyCodeLine{60             frame.repaint();}
+\DoxyCodeLine{61         \}, dbManager).rootPanel());}
+\DoxyCodeLine{62         frame.setDefaultCloseOperation(JFrame.EXIT\_ON\_CLOSE);}
+\DoxyCodeLine{63         frame.pack();}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65         \textcolor{comment}{// Set window size to be 1/2 of screen dimensions}}
+\DoxyCodeLine{66         frame.setSize(gd.getDisplayMode().getWidth() * 2/3 , gd.getDisplayMode().getHeight() * 2/3);}
+\DoxyCodeLine{67         frame.setLocationRelativeTo(\textcolor{keyword}{null}); \textcolor{comment}{// Center window}}
+\DoxyCodeLine{68         frame.setVisible(\textcolor{keyword}{true});}
+\DoxyCodeLine{69     \}}
+
 \end{DoxyCode}
 
 

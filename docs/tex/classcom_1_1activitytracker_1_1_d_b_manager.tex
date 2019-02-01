@@ -1,5 +1,5 @@
 \hypertarget{classcom_1_1activitytracker_1_1_d_b_manager}{}\section{com.\+activitytracker.\+D\+B\+Manager Class Reference}
-\label{classcom_1_1activitytracker_1_1_d_b_manager}\index{com.\+activitytracker.\+D\+B\+Manager@{com.\+activitytracker.\+D\+B\+Manager}}
+\label{classcom_1_1activitytracker_1_1_d_b_manager}\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}}
 
 
 Collaboration diagram for com.\+activitytracker.\+D\+B\+Manager\+:
@@ -81,9 +81,9 @@ Definition at line 30 of file D\+B\+Manager.\+java.
 
 \subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_ac1f558ef56fe02d74fe103a473a15bb5}\label{classcom_1_1activitytracker_1_1_d_b_manager_ac1f558ef56fe02d74fe103a473a15bb5}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!D\+B\+Manager@{D\+B\+Manager}}
-\index{D\+B\+Manager@{D\+B\+Manager}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{D\+B\+Manager()}{DBManager()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!DBManager@{DBManager}}
+\index{DBManager@{DBManager}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{DBManager()}{DBManager()}}
 {\footnotesize\ttfamily com.\+activitytracker.\+D\+B\+Manager.\+D\+B\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [package]}}
 
 Creates a new \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager}{D\+B\+Manager}} object.
@@ -95,17 +95,18 @@ This constructor takes no parameters as verification of the S\+Q\+Lite database 
 Definition at line 47 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-47                 \{
-48     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{47                 \{}
+\DoxyCodeLine{48     \}}
+
 \end{DoxyCode}
 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_ac390a33d3547306b250c8a9ed370997c}\label{classcom_1_1activitytracker_1_1_d_b_manager_ac390a33d3547306b250c8a9ed370997c}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!create\+User@{create\+User}}
-\index{create\+User@{create\+User}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{create\+User()}{createUser()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!createUser@{createUser}}
+\index{createUser@{createUser}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{createUser()}{createUser()}}
 {\footnotesize\ttfamily void com.\+activitytracker.\+D\+B\+Manager.\+create\+User (\begin{DoxyParamCaption}\item[{final String}]{name,  }\item[{final String}]{email\+Address,  }\item[{final java.\+util.\+Date}]{dateof\+Birth,  }\item[{final User.\+Sex}]{sex,  }\item[{final float}]{height,  }\item[{final float}]{weight,  }\item[{final \mbox{\hyperlink{classcom_1_1activitytracker_1_1_secure_string}{Secure\+String}}}]{secure\+Password }\end{DoxyParamCaption}) throws Assertion\+Error}
 
 Adds a row for a user to the Users table in the S\+Q\+Lite database for the app.
@@ -134,55 +135,56 @@ Requires that the database tables exist and are in the correct format. If the us
 Definition at line 64 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-66                                                                                     \{
-67 
-68         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_af05d79f33ecf2920a67d1b9cf82c079f}{userExists}}(emailAddress)) \{
-69             String sqlQuery = \textcolor{stringliteral}{"INSERT INTO Users ("} +
-70                     \textcolor{stringliteral}{"email\_address, "} +
-71                     \textcolor{stringliteral}{"name, "} +
-72                     \textcolor{stringliteral}{"date\_of\_birth, "} +
-73                     \textcolor{stringliteral}{"sex, "} +
-74                     \textcolor{stringliteral}{"height, "} +
-75                     \textcolor{stringliteral}{"weight,"} +
-76                     \textcolor{stringliteral}{"password\_hash,"} +
-77                     \textcolor{stringliteral}{"password\_salt,"} +
-78                     \textcolor{stringliteral}{"created\_at"} +
-79                     \textcolor{stringliteral}{") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"};
-80             byte sexByte = sex.equals(User.Sex.MALE) ? (byte) 1 : (byte) 0;
-81             java.sql.Date currentTime = \textcolor{keyword}{new} java.sql.Date(System.currentTimeMillis());
-82 
-83             \textcolor{keywordflow}{try} \{
-84                 PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);
-85                 stmt.setString(1, emailAddress);
-86                 stmt.setString(2, name);
-87                 stmt.setLong(3, dateofBirth.getTime());
-88                 stmt.setByte(4, sexByte);
-89                 stmt.setFloat(5, height);
-90                 stmt.setFloat(6, weight);
-91                 stmt.setString(7, securePassword.toString());
-92                 stmt.setBytes(8, securePassword.getSalt());
-93                 stmt.setDate(9, currentTime);
-94 
-95                 \textcolor{keywordflow}{if} (stmt.executeUpdate() != 1) \{
-96                     System.err.println(\textcolor{stringliteral}{"User not added to database."});
-97                 \}
-98 
-99                 stmt.close();
-100             \}
-101             \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-102                 System.err.println(e.getMessage());
-103             \}
-104         \}
-105         \textcolor{keywordflow}{else} \{
-106             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} AssertionError(\textcolor{stringliteral}{"User with email address '"} + emailAddress + \textcolor{stringliteral}{"' already exists."});
-107         \}
-108     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{66                                                                                     \{}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_af05d79f33ecf2920a67d1b9cf82c079f}{userExists}}(emailAddress)) \{}
+\DoxyCodeLine{69             String sqlQuery = \textcolor{stringliteral}{"INSERT INTO Users ("} +}
+\DoxyCodeLine{70                     \textcolor{stringliteral}{"email\_address, "} +}
+\DoxyCodeLine{71                     \textcolor{stringliteral}{"name, "} +}
+\DoxyCodeLine{72                     \textcolor{stringliteral}{"date\_of\_birth, "} +}
+\DoxyCodeLine{73                     \textcolor{stringliteral}{"sex, "} +}
+\DoxyCodeLine{74                     \textcolor{stringliteral}{"height, "} +}
+\DoxyCodeLine{75                     \textcolor{stringliteral}{"weight,"} +}
+\DoxyCodeLine{76                     \textcolor{stringliteral}{"password\_hash,"} +}
+\DoxyCodeLine{77                     \textcolor{stringliteral}{"password\_salt,"} +}
+\DoxyCodeLine{78                     \textcolor{stringliteral}{"created\_at"} +}
+\DoxyCodeLine{79                     \textcolor{stringliteral}{") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"};}
+\DoxyCodeLine{80             \textcolor{keywordtype}{byte} sexByte = sex.equals(User.Sex.MALE) ? (byte) 1 : (\textcolor{keywordtype}{byte}) 0;}
+\DoxyCodeLine{81             java.sql.Date currentTime = \textcolor{keyword}{new} java.sql.Date(System.currentTimeMillis());}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83             \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{84                 PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);}
+\DoxyCodeLine{85                 stmt.setString(1, emailAddress);}
+\DoxyCodeLine{86                 stmt.setString(2, name);}
+\DoxyCodeLine{87                 stmt.setLong(3, dateofBirth.getTime());}
+\DoxyCodeLine{88                 stmt.setByte(4, sexByte);}
+\DoxyCodeLine{89                 stmt.setFloat(5, height);}
+\DoxyCodeLine{90                 stmt.setFloat(6, weight);}
+\DoxyCodeLine{91                 stmt.setString(7, securePassword.toString());}
+\DoxyCodeLine{92                 stmt.setBytes(8, securePassword.getSalt());}
+\DoxyCodeLine{93                 stmt.setDate(9, currentTime);}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95                 \textcolor{keywordflow}{if} (stmt.executeUpdate() != 1) \{}
+\DoxyCodeLine{96                     System.err.println(\textcolor{stringliteral}{"User not added to database."});}
+\DoxyCodeLine{97                 \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99                 stmt.close();}
+\DoxyCodeLine{100             \}}
+\DoxyCodeLine{101             \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{102                 System.err.println(e.getMessage());}
+\DoxyCodeLine{103             \}}
+\DoxyCodeLine{104         \}}
+\DoxyCodeLine{105         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{106             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} AssertionError(\textcolor{stringliteral}{"User with email address '"} + emailAddress + \textcolor{stringliteral}{"' already exists."});}
+\DoxyCodeLine{107         \}}
+\DoxyCodeLine{108     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_adef71a18dc05536d80e83311841e1953}\label{classcom_1_1activitytracker_1_1_d_b_manager_adef71a18dc05536d80e83311841e1953}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!execute\+Query@{execute\+Query}}
-\index{execute\+Query@{execute\+Query}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{execute\+Query()}{executeQuery()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!executeQuery@{executeQuery}}
+\index{executeQuery@{executeQuery}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{executeQuery()}{executeQuery()}}
 {\footnotesize\ttfamily Result\+Set com.\+activitytracker.\+D\+B\+Manager.\+execute\+Query (\begin{DoxyParamCaption}\item[{final String}]{sql\+Query }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 A wrapper method for processing {\itshape safe} S\+QL queries.
@@ -204,26 +206,27 @@ This method returns a Result\+Set containing the returned row(s) and/or column(s
 Definition at line 732 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-732                                                           \{
-733         ResultSet res = null;
-734 
-735         \textcolor{keywordflow}{try} \{
-736             Statement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.createStatement();
-737             res = stmt.executeQuery(sqlQuery);
-738             stmt.close();
-739         \}
-740         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-741             System.err.println(e.getMessage());
-742         \}
-743 
-744         \textcolor{keywordflow}{return} res;
-745     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{732                                                           \{}
+\DoxyCodeLine{733         ResultSet res = \textcolor{keyword}{null};}
+\DoxyCodeLine{734 }
+\DoxyCodeLine{735         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{736             Statement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.createStatement();}
+\DoxyCodeLine{737             res = stmt.executeQuery(sqlQuery);}
+\DoxyCodeLine{738             stmt.close();}
+\DoxyCodeLine{739         \}}
+\DoxyCodeLine{740         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{741             System.err.println(e.getMessage());}
+\DoxyCodeLine{742         \}}
+\DoxyCodeLine{743 }
+\DoxyCodeLine{744         \textcolor{keywordflow}{return} res;}
+\DoxyCodeLine{745     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_a382397e2bdf309901d1c80ff66be69b7}\label{classcom_1_1activitytracker_1_1_d_b_manager_a382397e2bdf309901d1c80ff66be69b7}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!execute\+Update@{execute\+Update}}
-\index{execute\+Update@{execute\+Update}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{execute\+Update()}{executeUpdate()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!executeUpdate@{executeUpdate}}
+\index{executeUpdate@{executeUpdate}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{executeUpdate()}{executeUpdate()}}
 {\footnotesize\ttfamily boolean com.\+activitytracker.\+D\+B\+Manager.\+execute\+Update (\begin{DoxyParamCaption}\item[{final String}]{sql\+Query }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 A wrapper method for processing {\itshape safe} S\+QL queries.
@@ -245,25 +248,26 @@ This method returns a boolean indicating if the query was successful.
 Definition at line 760 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-760                                                          \{
-761         \textcolor{keywordflow}{try} \{
-762             Statement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.createStatement();
-763             stmt.executeUpdate(sqlQuery);
-764             stmt.close();
-765         \}
-766         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-767             System.err.println(e.getMessage());
-768             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-769         \}
-770 
-771         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-772     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{760                                                          \{}
+\DoxyCodeLine{761         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{762             Statement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.createStatement();}
+\DoxyCodeLine{763             stmt.executeUpdate(sqlQuery);}
+\DoxyCodeLine{764             stmt.close();}
+\DoxyCodeLine{765         \}}
+\DoxyCodeLine{766         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{767             System.err.println(e.getMessage());}
+\DoxyCodeLine{768             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{769         \}}
+\DoxyCodeLine{770 }
+\DoxyCodeLine{771         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{772     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_a0576baf67b45c7d2d0ba369052e4404e}\label{classcom_1_1activitytracker_1_1_d_b_manager_a0576baf67b45c7d2d0ba369052e4404e}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!get\+Date\+Of\+Birth@{get\+Date\+Of\+Birth}}
-\index{get\+Date\+Of\+Birth@{get\+Date\+Of\+Birth}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{get\+Date\+Of\+Birth()}{getDateOfBirth()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!getDateOfBirth@{getDateOfBirth}}
+\index{getDateOfBirth@{getDateOfBirth}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{getDateOfBirth()}{getDateOfBirth()}}
 {\footnotesize\ttfamily Date com.\+activitytracker.\+D\+B\+Manager.\+get\+Date\+Of\+Birth (\begin{DoxyParamCaption}\item[{final int}]{id }\end{DoxyParamCaption})}
 
 Retrieves the user\textquotesingle{}s date of birth (D\+OB) from the database.
@@ -283,33 +287,34 @@ This method returns a Date object containing the user\textquotesingle{}s D\+OB (
 Definition at line 294 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-294                                              \{
-295         Date DOB;
-296         java.sql.Date DOBResult;
-297         ResultSet res;
-298         String sqlQuery = \textcolor{stringliteral}{"SELECT date\_of\_birth FROM Users WHERE id=?"};
-299         \textcolor{keywordflow}{try} \{
-300             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);
-301             stmt.setInt(1, \textcolor{keywordtype}{id});
-302             res = stmt.executeQuery();
-303             DOBResult = res.getDate(\textcolor{stringliteral}{"date\_of\_birth"});
-304 
-305             stmt.close();
-306         \}
-307         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-308             System.err.println(e.getMessage());
-309             \textcolor{keywordflow}{return} null;
-310         \}
-311         DOB = \textcolor{keyword}{new} Date(DOBResult.getYear(), DOBResult.getMonth(), DOBResult.getDay());
-312 
-313         \textcolor{keywordflow}{return} DOB;
-314     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{294                                              \{}
+\DoxyCodeLine{295         Date DOB;}
+\DoxyCodeLine{296         java.sql.Date DOBResult;}
+\DoxyCodeLine{297         ResultSet res;}
+\DoxyCodeLine{298         String sqlQuery = \textcolor{stringliteral}{"SELECT date\_of\_birth FROM Users WHERE id=?"};}
+\DoxyCodeLine{299         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{300             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);}
+\DoxyCodeLine{301             stmt.setInt(1, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{302             res = stmt.executeQuery();}
+\DoxyCodeLine{303             DOBResult = res.getDate(\textcolor{stringliteral}{"date\_of\_birth"});}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305             stmt.close();}
+\DoxyCodeLine{306         \}}
+\DoxyCodeLine{307         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{308             System.err.println(e.getMessage());}
+\DoxyCodeLine{309             \textcolor{keywordflow}{return} \textcolor{keyword}{null};}
+\DoxyCodeLine{310         \}}
+\DoxyCodeLine{311         DOB = \textcolor{keyword}{new} Date(DOBResult.getYear(), DOBResult.getMonth(), DOBResult.getDay());}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313         \textcolor{keywordflow}{return} DOB;}
+\DoxyCodeLine{314     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_a1bef7a6f466db41b1a6da7a502d35bb9}\label{classcom_1_1activitytracker_1_1_d_b_manager_a1bef7a6f466db41b1a6da7a502d35bb9}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!get\+Run\+Date@{get\+Run\+Date}}
-\index{get\+Run\+Date@{get\+Run\+Date}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{get\+Run\+Date()}{getRunDate()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!getRunDate@{getRunDate}}
+\index{getRunDate@{getRunDate}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{getRunDate()}{getRunDate()}}
 {\footnotesize\ttfamily java.\+util.\+Date com.\+activitytracker.\+D\+B\+Manager.\+get\+Run\+Date (\begin{DoxyParamCaption}\item[{final int}]{run\+ID }\end{DoxyParamCaption})}
 
 Retrieves a run\textquotesingle{}s date from the database using its unique ID
@@ -324,29 +329,30 @@ Retrieves a run\textquotesingle{}s date from the database using its unique ID
 Definition at line 627 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-627                                                       \{
-628         ResultSet res;
-629         \textcolor{keywordtype}{long} fromEpoch;
-630         java.util.Date date = null;
-631         \textcolor{keywordflow}{try} \{
-632             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(\textcolor{stringliteral}{"SELECT date FROM Runs WHERE id=?"});
-633             stmt.setInt(1, runID);
-634             res = stmt.executeQuery();
-635             fromEpoch = res.getLong(\textcolor{stringliteral}{"date"});
-636             date = \textcolor{keyword}{new} java.util.Date(fromEpoch);
-637         \}
-638         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-639             System.err.println(e.getMessage());
-640         \}
-641 
-642         \textcolor{keywordflow}{return} date;
-643     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{627                                                       \{}
+\DoxyCodeLine{628         ResultSet res;}
+\DoxyCodeLine{629         \textcolor{keywordtype}{long} fromEpoch;}
+\DoxyCodeLine{630         java.util.Date date = \textcolor{keyword}{null};}
+\DoxyCodeLine{631         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{632             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(\textcolor{stringliteral}{"SELECT date FROM Runs WHERE id=?"});}
+\DoxyCodeLine{633             stmt.setInt(1, runID);}
+\DoxyCodeLine{634             res = stmt.executeQuery();}
+\DoxyCodeLine{635             fromEpoch = res.getLong(\textcolor{stringliteral}{"date"});}
+\DoxyCodeLine{636             date = \textcolor{keyword}{new} java.util.Date(fromEpoch);}
+\DoxyCodeLine{637         \}}
+\DoxyCodeLine{638         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{639             System.err.println(e.getMessage());}
+\DoxyCodeLine{640         \}}
+\DoxyCodeLine{641 }
+\DoxyCodeLine{642         \textcolor{keywordflow}{return} date;}
+\DoxyCodeLine{643     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_a666452f1e5862f90c06b0beb9a9fcfdd}\label{classcom_1_1activitytracker_1_1_d_b_manager_a666452f1e5862f90c06b0beb9a9fcfdd}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!get\+Run\+Float\+Attribute@{get\+Run\+Float\+Attribute}}
-\index{get\+Run\+Float\+Attribute@{get\+Run\+Float\+Attribute}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{get\+Run\+Float\+Attribute()}{getRunFloatAttribute()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!getRunFloatAttribute@{getRunFloatAttribute}}
+\index{getRunFloatAttribute@{getRunFloatAttribute}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{getRunFloatAttribute()}{getRunFloatAttribute()}}
 {\footnotesize\ttfamily float com.\+activitytracker.\+D\+B\+Manager.\+get\+Run\+Float\+Attribute (\begin{DoxyParamCaption}\item[{final \mbox{\hyperlink{enumcom_1_1activitytracker_1_1_run_attribute}{Run\+Attribute}}}]{attribute,  }\item[{final int}]{r\+ID }\end{DoxyParamCaption})}
 
 Retrieves a run\textquotesingle{}s attribute as a floating point number, where applicable, from the database.
@@ -374,56 +380,56 @@ This method returns a float containing run attribute as specified by the {\itsha
 Definition at line 578 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-578                                                                                    \{
-579         ResultSet res;
-580         PreparedStatement stmt;
-581         String sqlQuery, columnLabel;
-582         \textcolor{keywordtype}{float} attrVal = 0.0f;
-583         \textcolor{keywordflow}{switch} (attribute) \{
-584             \textcolor{keywordflow}{case} DURATION:
-585                 columnLabel = \textcolor{stringliteral}{"duration"};
-586                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Runs WHERE id=?"};
-587                 \textcolor{keywordflow}{break};
-588             \textcolor{keywordflow}{case} DISTANCE:
-589                 columnLabel = \textcolor{stringliteral}{"distance"};
-590                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Runs WHERE id=?"};
-591                 \textcolor{keywordflow}{break};
-592             \textcolor{keywordflow}{case} ALTITUDE\_ASCENDED:
-593                 columnLabel = \textcolor{stringliteral}{"altitude\_ascended"};
-594                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Runs WHERE id=?"};
-595                 \textcolor{keywordflow}{break};
-596             \textcolor{keywordflow}{case} ALTITUDE\_DESCENDED:
-597                 columnLabel = \textcolor{stringliteral}{"altitude\_descended"};
-598                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Runs WHERE id=?"};
-599                 \textcolor{keywordflow}{break};
-600             \textcolor{keywordflow}{default}:
-601                 \textcolor{keywordflow}{return} attrVal;
-602         \}
-603         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a723ac1c573bacdd0b62894357bd65a9b}{runExists}}(rID)) \{
-604             \textcolor{keywordflow}{try} \{
-605                 stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);
-606                 stmt.setInt(1, rID);
-607                 res = stmt.executeQuery();
-608                 attrVal = res.getFloat(columnLabel);
-609             \}
-610             \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-611                 System.err.println(e.getMessage());
-612             \}
-613         \}
-614         \textcolor{keywordflow}{else} \{
-615             System.err.println(\textcolor{stringliteral}{"Run "} + Integer.toString(rID) + \textcolor{stringliteral}{" does not exist. Cannot get "} + 
-      columnLabel + \textcolor{stringliteral}{"."});
-616         \}
-617 
-618         \textcolor{keywordflow}{return} attrVal;
-619 
-620     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{578                                                                                    \{}
+\DoxyCodeLine{579         ResultSet res;}
+\DoxyCodeLine{580         PreparedStatement stmt;}
+\DoxyCodeLine{581         String sqlQuery, columnLabel;}
+\DoxyCodeLine{582         \textcolor{keywordtype}{float} attrVal = 0.0f;}
+\DoxyCodeLine{583         \textcolor{keywordflow}{switch} (attribute) \{}
+\DoxyCodeLine{584             \textcolor{keywordflow}{case} DURATION:}
+\DoxyCodeLine{585                 columnLabel = \textcolor{stringliteral}{"duration"};}
+\DoxyCodeLine{586                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Runs WHERE id=?"};}
+\DoxyCodeLine{587                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{588             \textcolor{keywordflow}{case} DISTANCE:}
+\DoxyCodeLine{589                 columnLabel = \textcolor{stringliteral}{"distance"};}
+\DoxyCodeLine{590                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Runs WHERE id=?"};}
+\DoxyCodeLine{591                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{592             \textcolor{keywordflow}{case} ALTITUDE\_ASCENDED:}
+\DoxyCodeLine{593                 columnLabel = \textcolor{stringliteral}{"altitude\_ascended"};}
+\DoxyCodeLine{594                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Runs WHERE id=?"};}
+\DoxyCodeLine{595                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{596             \textcolor{keywordflow}{case} ALTITUDE\_DESCENDED:}
+\DoxyCodeLine{597                 columnLabel = \textcolor{stringliteral}{"altitude\_descended"};}
+\DoxyCodeLine{598                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Runs WHERE id=?"};}
+\DoxyCodeLine{599                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{600             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{601                 \textcolor{keywordflow}{return} attrVal;}
+\DoxyCodeLine{602         \}}
+\DoxyCodeLine{603         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a723ac1c573bacdd0b62894357bd65a9b}{runExists}}(rID)) \{}
+\DoxyCodeLine{604             \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{605                 stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);}
+\DoxyCodeLine{606                 stmt.setInt(1, rID);}
+\DoxyCodeLine{607                 res = stmt.executeQuery();}
+\DoxyCodeLine{608                 attrVal = res.getFloat(columnLabel);}
+\DoxyCodeLine{609             \}}
+\DoxyCodeLine{610             \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{611                 System.err.println(e.getMessage());}
+\DoxyCodeLine{612             \}}
+\DoxyCodeLine{613         \}}
+\DoxyCodeLine{614         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{615             System.err.println(\textcolor{stringliteral}{"Run "} + Integer.toString(rID) + \textcolor{stringliteral}{" does not exist. Cannot get "} + columnLabel + \textcolor{stringliteral}{"."});}
+\DoxyCodeLine{616         \}}
+\DoxyCodeLine{617 }
+\DoxyCodeLine{618         \textcolor{keywordflow}{return} attrVal;}
+\DoxyCodeLine{619 }
+\DoxyCodeLine{620     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_a48d9e51c1b73064b8f773cdde5113928}\label{classcom_1_1activitytracker_1_1_d_b_manager_a48d9e51c1b73064b8f773cdde5113928}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!get\+Runs@{get\+Runs}}
-\index{get\+Runs@{get\+Runs}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{get\+Runs()}{getRuns()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!getRuns@{getRuns}}
+\index{getRuns@{getRuns}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{getRuns()}{getRuns()}}
 {\footnotesize\ttfamily Vector$<$Integer$>$ com.\+activitytracker.\+D\+B\+Manager.\+get\+Runs (\begin{DoxyParamCaption}\item[{final int}]{user\+ID,  }\item[{final java.\+util.\+Date}]{start\+Date,  }\item[{final java.\+util.\+Date}]{end\+Date }\end{DoxyParamCaption})}
 
 Queries the database for all runs by a user with user ID {\itshape user\+ID} between {\itshape start\+Date} and {\itshape end\+Date}.
@@ -445,39 +451,39 @@ Returns a vector containing run I\+Ds for each run that meets the search criteri
 Definition at line 691 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-691                                                                                                            
-              \{
-692         ResultSet res;
-693         Vector<Integer> runs = \textcolor{keyword}{new} Vector<>();
-694         \textcolor{keywordflow}{try} \{
-695             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(
-696                     \textcolor{stringliteral}{"SELECT id FROM Runs WHERE user\_id=? AND date BETWEEN ? AND ?;"});
-697             stmt.setInt(1, userID);
-698             stmt.setLong(2, startDate.getTime());
-699             stmt.setLong(3, endDate.getTime());
-700 
-701             res = stmt.executeQuery();
-702 
-703             \textcolor{keywordflow}{if} (res.isClosed())
-704                 System.err.println(\textcolor{stringliteral}{"Result set closed; cannot get any data?"});
-705 
-706             \textcolor{keywordflow}{while} (res.next()) \{
-707                 runs.add(res.getInt(\textcolor{stringliteral}{"id"}));
-708             \}
-709             stmt.close();
-710         \}
-711         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-712             System.err.println(e.getMessage());
-713         \}
-714 
-715         \textcolor{keywordflow}{return} runs;
-716     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{691                                                                                                                    \{}
+\DoxyCodeLine{692         ResultSet res;}
+\DoxyCodeLine{693         Vector<Integer> runs = \textcolor{keyword}{new} Vector<>();}
+\DoxyCodeLine{694         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{695             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(}
+\DoxyCodeLine{696                     \textcolor{stringliteral}{"SELECT id FROM Runs WHERE user\_id=? AND date BETWEEN ? AND ?;"});}
+\DoxyCodeLine{697             stmt.setInt(1, userID);}
+\DoxyCodeLine{698             stmt.setLong(2, startDate.getTime());}
+\DoxyCodeLine{699             stmt.setLong(3, endDate.getTime());}
+\DoxyCodeLine{700 }
+\DoxyCodeLine{701             res = stmt.executeQuery();}
+\DoxyCodeLine{702 }
+\DoxyCodeLine{703             \textcolor{keywordflow}{if} (res.isClosed())}
+\DoxyCodeLine{704                 System.err.println(\textcolor{stringliteral}{"Result set closed; cannot get any data?"});}
+\DoxyCodeLine{705 }
+\DoxyCodeLine{706             \textcolor{keywordflow}{while} (res.next()) \{}
+\DoxyCodeLine{707                 runs.add(res.getInt(\textcolor{stringliteral}{"id"}));}
+\DoxyCodeLine{708             \}}
+\DoxyCodeLine{709             stmt.close();}
+\DoxyCodeLine{710         \}}
+\DoxyCodeLine{711         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{712             System.err.println(e.getMessage());}
+\DoxyCodeLine{713         \}}
+\DoxyCodeLine{714 }
+\DoxyCodeLine{715         \textcolor{keywordflow}{return} runs;}
+\DoxyCodeLine{716     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_a98df66254bec4d74b29cfe468a9fc794}\label{classcom_1_1activitytracker_1_1_d_b_manager_a98df66254bec4d74b29cfe468a9fc794}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!get\+User\+Float\+Attribute@{get\+User\+Float\+Attribute}}
-\index{get\+User\+Float\+Attribute@{get\+User\+Float\+Attribute}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{get\+User\+Float\+Attribute()}{getUserFloatAttribute()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!getUserFloatAttribute@{getUserFloatAttribute}}
+\index{getUserFloatAttribute@{getUserFloatAttribute}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{getUserFloatAttribute()}{getUserFloatAttribute()}}
 {\footnotesize\ttfamily float com.\+activitytracker.\+D\+B\+Manager.\+get\+User\+Float\+Attribute (\begin{DoxyParamCaption}\item[{final \mbox{\hyperlink{enumcom_1_1activitytracker_1_1_user_attribute}{User\+Attribute}}}]{attribute,  }\item[{final int}]{id }\end{DoxyParamCaption})}
 
 Retrieves a user\textquotesingle{}s attribute in floating point format, when applicable, from the database\textquotesingle{}s Users table.
@@ -503,43 +509,44 @@ Returns a floating point number corresponding to the \mbox{\hyperlink{enumcom_1_
 Definition at line 253 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-253                                                                                     \{
-254         \textcolor{keywordtype}{float} attrVal;
-255         ResultSet res;
-256         String sqlQuery, columnLabel;
-257         \textcolor{keywordflow}{switch} (attribute) \{
-258             \textcolor{keywordflow}{case} WEIGHT:
-259                 columnLabel = \textcolor{stringliteral}{"weight"};
-260                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Users WHERE id=?"};
-261                 \textcolor{keywordflow}{break};
-262             \textcolor{keywordflow}{case} HEIGHT:
-263                 columnLabel = \textcolor{stringliteral}{"height"};
-264                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Users WHERE id=?"};
-265                 \textcolor{keywordflow}{break};
-266             \textcolor{keywordflow}{default}:
-267                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} AssertionError(\textcolor{stringliteral}{"Incorrect UserAttribute enumeration type passed to method."});
-268         \}
-269         \textcolor{keywordflow}{try} \{
-270             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);
-271             stmt.setInt(1, \textcolor{keywordtype}{id});
-272             res = stmt.executeQuery();
-273             attrVal = res.getFloat(columnLabel);
-274 
-275             stmt.close();
-276         \}
-277         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-278             System.err.println(e.getMessage());
-279             \textcolor{keywordflow}{return} 0.0f;
-280         \}
-281 
-282         \textcolor{keywordflow}{return} attrVal;
-283     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{253                                                                                     \{}
+\DoxyCodeLine{254         \textcolor{keywordtype}{float} attrVal;}
+\DoxyCodeLine{255         ResultSet res;}
+\DoxyCodeLine{256         String sqlQuery, columnLabel;}
+\DoxyCodeLine{257         \textcolor{keywordflow}{switch} (attribute) \{}
+\DoxyCodeLine{258             \textcolor{keywordflow}{case} WEIGHT:}
+\DoxyCodeLine{259                 columnLabel = \textcolor{stringliteral}{"weight"};}
+\DoxyCodeLine{260                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Users WHERE id=?"};}
+\DoxyCodeLine{261                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{262             \textcolor{keywordflow}{case} HEIGHT:}
+\DoxyCodeLine{263                 columnLabel = \textcolor{stringliteral}{"height"};}
+\DoxyCodeLine{264                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Users WHERE id=?"};}
+\DoxyCodeLine{265                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{266             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{267                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} AssertionError(\textcolor{stringliteral}{"Incorrect UserAttribute enumeration type passed to method."});}
+\DoxyCodeLine{268         \}}
+\DoxyCodeLine{269         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{270             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);}
+\DoxyCodeLine{271             stmt.setInt(1, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{272             res = stmt.executeQuery();}
+\DoxyCodeLine{273             attrVal = res.getFloat(columnLabel);}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275             stmt.close();}
+\DoxyCodeLine{276         \}}
+\DoxyCodeLine{277         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{278             System.err.println(e.getMessage());}
+\DoxyCodeLine{279             \textcolor{keywordflow}{return} 0.0f;}
+\DoxyCodeLine{280         \}}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{282         \textcolor{keywordflow}{return} attrVal;}
+\DoxyCodeLine{283     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_a195dcdeabdd00facb19d720976dd3f53}\label{classcom_1_1activitytracker_1_1_d_b_manager_a195dcdeabdd00facb19d720976dd3f53}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!get\+User\+I\+D\+By\+Email@{get\+User\+I\+D\+By\+Email}}
-\index{get\+User\+I\+D\+By\+Email@{get\+User\+I\+D\+By\+Email}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{get\+User\+I\+D\+By\+Email()}{getUserIDByEmail()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!getUserIDByEmail@{getUserIDByEmail}}
+\index{getUserIDByEmail@{getUserIDByEmail}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{getUserIDByEmail()}{getUserIDByEmail()}}
 {\footnotesize\ttfamily int com.\+activitytracker.\+D\+B\+Manager.\+get\+User\+I\+D\+By\+Email (\begin{DoxyParamCaption}\item[{final String}]{email\+Address }\end{DoxyParamCaption})}
 
 As we are using the user\textquotesingle{}s email address as their identifying attribute, they will supply this when they log in. Hence, as the database relates everything to the user\textquotesingle{}s unique ID, we must retrieve this ID given the email address.
@@ -559,30 +566,31 @@ This method returns a unique integer corresponding to the row in the database\te
 Definition at line 151 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-151                                                            \{
-152         \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = 0;
-153         ResultSet res;
-154         String sqlQuery = \textcolor{stringliteral}{"SELECT id FROM Users WHERE `email\_address`=?"};
-155         \textcolor{keywordflow}{try} \{
-156             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);
-157             stmt.setString(1, emailAddress);
-158             res =  stmt.executeQuery();
-159             \textcolor{keywordtype}{id} = res.getInt(\textcolor{stringliteral}{"id"});
-160 
-161             stmt.close();
-162         \}
-163         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-164             System.err.println(e.getMessage());
-165         \}
-166 
-167         \textcolor{keywordflow}{return} id;
-168     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{151                                                            \{}
+\DoxyCodeLine{152         \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = 0;}
+\DoxyCodeLine{153         ResultSet res;}
+\DoxyCodeLine{154         String sqlQuery = \textcolor{stringliteral}{"SELECT id FROM Users WHERE `email\_address`=?"};}
+\DoxyCodeLine{155         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{156             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);}
+\DoxyCodeLine{157             stmt.setString(1, emailAddress);}
+\DoxyCodeLine{158             res =  stmt.executeQuery();}
+\DoxyCodeLine{159             \textcolor{keywordtype}{id} = res.getInt(\textcolor{stringliteral}{"id"});}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161             stmt.close();}
+\DoxyCodeLine{162         \}}
+\DoxyCodeLine{163         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{164             System.err.println(e.getMessage());}
+\DoxyCodeLine{165         \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167         \textcolor{keywordflow}{return} id;}
+\DoxyCodeLine{168     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_aab14c61b3f3a17bdea10cab1b5fd9337}\label{classcom_1_1activitytracker_1_1_d_b_manager_aab14c61b3f3a17bdea10cab1b5fd9337}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!get\+User\+Last\+R\+ID@{get\+User\+Last\+R\+ID}}
-\index{get\+User\+Last\+R\+ID@{get\+User\+Last\+R\+ID}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{get\+User\+Last\+R\+I\+D()}{getUserLastRID()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!getUserLastRID@{getUserLastRID}}
+\index{getUserLastRID@{getUserLastRID}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{getUserLastRID()}{getUserLastRID()}}
 {\footnotesize\ttfamily int com.\+activitytracker.\+D\+B\+Manager.\+get\+User\+Last\+R\+ID (\begin{DoxyParamCaption}\item[{final int}]{id }\end{DoxyParamCaption})}
 
 Retrieves the last workout ID that the user added as an integer from the database.
@@ -602,30 +610,31 @@ An integer corresponding to the last row in the Workouts table that the user cre
 Definition at line 391 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-391                                             \{
-392         \textcolor{keywordtype}{int} rID = 0;
-393         ResultSet res;
-394         String columnLabel = \textcolor{stringliteral}{"last\_run"};
-395         String sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Users WHERE id=?"};
-396         \textcolor{keywordflow}{try} \{
-397             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);
-398             stmt.setInt(1, \textcolor{keywordtype}{id});
-399             res = stmt.executeQuery();
-400             rID = res.getInt(columnLabel);
-401             stmt.close();
-402         \}
-403         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-404             System.err.println(e.getMessage());
-405         \}
-406 
-407         \textcolor{keywordflow}{return} rID;
-408     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{391                                             \{}
+\DoxyCodeLine{392         \textcolor{keywordtype}{int} rID = 0;}
+\DoxyCodeLine{393         ResultSet res;}
+\DoxyCodeLine{394         String columnLabel = \textcolor{stringliteral}{"last\_run"};}
+\DoxyCodeLine{395         String sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Users WHERE id=?"};}
+\DoxyCodeLine{396         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{397             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);}
+\DoxyCodeLine{398             stmt.setInt(1, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{399             res = stmt.executeQuery();}
+\DoxyCodeLine{400             rID = res.getInt(columnLabel);}
+\DoxyCodeLine{401             stmt.close();}
+\DoxyCodeLine{402         \}}
+\DoxyCodeLine{403         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{404             System.err.println(e.getMessage());}
+\DoxyCodeLine{405         \}}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{407         \textcolor{keywordflow}{return} rID;}
+\DoxyCodeLine{408     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_aeab864b072cc08c0521e80ae1f459ca7}\label{classcom_1_1activitytracker_1_1_d_b_manager_aeab864b072cc08c0521e80ae1f459ca7}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!get\+User\+Pass\+Salt@{get\+User\+Pass\+Salt}}
-\index{get\+User\+Pass\+Salt@{get\+User\+Pass\+Salt}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{get\+User\+Pass\+Salt()}{getUserPassSalt()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!getUserPassSalt@{getUserPassSalt}}
+\index{getUserPassSalt@{getUserPassSalt}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{getUserPassSalt()}{getUserPassSalt()}}
 {\footnotesize\ttfamily byte \mbox{[}$\,$\mbox{]} com.\+activitytracker.\+D\+B\+Manager.\+get\+User\+Pass\+Salt (\begin{DoxyParamCaption}\item[{final int}]{id }\end{DoxyParamCaption})}
 
 Retrieves a byte array containing the salt used to encrypt the user\textquotesingle{}s password from the database.
@@ -645,29 +654,30 @@ This method returns a byte array containing the user\textquotesingle{}s password
 Definition at line 362 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-362                                                 \{
-363         byte[] passSalt;
-364         ResultSet res;
-365         String sqlQuery = \textcolor{stringliteral}{"SELECT password\_salt FROM Users WHERE id=?"};
-366         \textcolor{keywordflow}{try} \{
-367             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);
-368             stmt.setInt(1, \textcolor{keywordtype}{id});
-369             res = stmt.executeQuery();
-370             passSalt = res.getBytes(\textcolor{stringliteral}{"password\_salt"});
-371             stmt.close();
-372         \}
-373         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-374             System.err.println(e.getMessage());
-375             \textcolor{keywordflow}{return} null;
-376         \}
-377         \textcolor{keywordflow}{return} passSalt;
-378     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{362                                                 \{}
+\DoxyCodeLine{363         \textcolor{keywordtype}{byte}[] passSalt;}
+\DoxyCodeLine{364         ResultSet res;}
+\DoxyCodeLine{365         String sqlQuery = \textcolor{stringliteral}{"SELECT password\_salt FROM Users WHERE id=?"};}
+\DoxyCodeLine{366         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{367             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);}
+\DoxyCodeLine{368             stmt.setInt(1, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{369             res = stmt.executeQuery();}
+\DoxyCodeLine{370             passSalt = res.getBytes(\textcolor{stringliteral}{"password\_salt"});}
+\DoxyCodeLine{371             stmt.close();}
+\DoxyCodeLine{372         \}}
+\DoxyCodeLine{373         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{374             System.err.println(e.getMessage());}
+\DoxyCodeLine{375             \textcolor{keywordflow}{return} \textcolor{keyword}{null};}
+\DoxyCodeLine{376         \}}
+\DoxyCodeLine{377         \textcolor{keywordflow}{return} passSalt;}
+\DoxyCodeLine{378     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_a4e695c111b877cfd1d918602551f65a1}\label{classcom_1_1activitytracker_1_1_d_b_manager_a4e695c111b877cfd1d918602551f65a1}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!get\+User\+Sex@{get\+User\+Sex}}
-\index{get\+User\+Sex@{get\+User\+Sex}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{get\+User\+Sex()}{getUserSex()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!getUserSex@{getUserSex}}
+\index{getUserSex@{getUserSex}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{getUserSex()}{getUserSex()}}
 {\footnotesize\ttfamily User.\+Sex com.\+activitytracker.\+D\+B\+Manager.\+get\+User\+Sex (\begin{DoxyParamCaption}\item[{final int}]{id }\end{DoxyParamCaption})}
 
 Retrieves the user\textquotesingle{}s gender from the database.
@@ -689,34 +699,35 @@ This method returns a \mbox{\hyperlink{enumcom_1_1activitytracker_1_1_user_1_1_s
 Definition at line 329 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-329                                              \{
-330         byte sex;
-331         ResultSet res;
-332         String sqlQuery = \textcolor{stringliteral}{"SELECT sex FROM Users WHERE id=?"};
-333         \textcolor{keywordflow}{try} \{
-334             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);
-335             stmt.setInt(1, \textcolor{keywordtype}{id});
-336             res = stmt.executeQuery();
-337             sex = res.getByte(\textcolor{stringliteral}{"sex"});
-338 
-339             stmt.close();
-340         \}
-341         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-342             System.err.println(e.getMessage());
-343             \textcolor{keywordflow}{return} null;
-344         \}
-345 
-346         \textcolor{keywordflow}{if} (sex == (byte) 1)
-347             \textcolor{keywordflow}{return} User.Sex.MALE;
-348         \textcolor{keywordflow}{else}
-349             \textcolor{keywordflow}{return} User.Sex.FEMALE;
-350     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{329                                              \{}
+\DoxyCodeLine{330         \textcolor{keywordtype}{byte} sex;}
+\DoxyCodeLine{331         ResultSet res;}
+\DoxyCodeLine{332         String sqlQuery = \textcolor{stringliteral}{"SELECT sex FROM Users WHERE id=?"};}
+\DoxyCodeLine{333         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{334             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);}
+\DoxyCodeLine{335             stmt.setInt(1, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{336             res = stmt.executeQuery();}
+\DoxyCodeLine{337             sex = res.getByte(\textcolor{stringliteral}{"sex"});}
+\DoxyCodeLine{338 }
+\DoxyCodeLine{339             stmt.close();}
+\DoxyCodeLine{340         \}}
+\DoxyCodeLine{341         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{342             System.err.println(e.getMessage());}
+\DoxyCodeLine{343             \textcolor{keywordflow}{return} \textcolor{keyword}{null};}
+\DoxyCodeLine{344         \}}
+\DoxyCodeLine{345 }
+\DoxyCodeLine{346         \textcolor{keywordflow}{if} (sex == (\textcolor{keywordtype}{byte}) 1)}
+\DoxyCodeLine{347             \textcolor{keywordflow}{return} User.Sex.MALE;}
+\DoxyCodeLine{348         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{349             \textcolor{keywordflow}{return} User.Sex.FEMALE;}
+\DoxyCodeLine{350     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_a20f726c054d6c8a6fc3ce629d87f1114}\label{classcom_1_1activitytracker_1_1_d_b_manager_a20f726c054d6c8a6fc3ce629d87f1114}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!get\+User\+String\+Attribute@{get\+User\+String\+Attribute}}
-\index{get\+User\+String\+Attribute@{get\+User\+String\+Attribute}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{get\+User\+String\+Attribute()}{getUserStringAttribute()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!getUserStringAttribute@{getUserStringAttribute}}
+\index{getUserStringAttribute@{getUserStringAttribute}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{getUserStringAttribute()}{getUserStringAttribute()}}
 {\footnotesize\ttfamily String com.\+activitytracker.\+D\+B\+Manager.\+get\+User\+String\+Attribute (\begin{DoxyParamCaption}\item[{final \mbox{\hyperlink{enumcom_1_1activitytracker_1_1_user_attribute}{User\+Attribute}}}]{attribute,  }\item[{final int}]{id }\end{DoxyParamCaption})}
 
 This method retrieves a string, varchar, text, or char field, when applicable, from the database\textquotesingle{}s Users table.
@@ -749,46 +760,47 @@ This method returns a string containing attribute specified by the {\itshape att
 Definition at line 199 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-199                                                                                       \{
-200         String name;
-201         ResultSet res;
-202         String sqlQuery, columnLabel;
-203         \textcolor{keywordflow}{switch} (attribute) \{
-204             \textcolor{keywordflow}{case} PASSWORD:
-205                 columnLabel = \textcolor{stringliteral}{"password\_hash"};
-206                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Users WHERE id=?"};
-207                 \textcolor{keywordflow}{break};
-208             \textcolor{keywordflow}{case} NAME:
-209                 columnLabel = \textcolor{stringliteral}{"name"};
-210                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Users WHERE id=?"};
-211                 \textcolor{keywordflow}{break};
-212             \textcolor{keywordflow}{case} EMAIL\_ADDRESS:
-213                 columnLabel = \textcolor{stringliteral}{"email\_address"};
-214                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Users WHERE id=?"};
-215                 \textcolor{keywordflow}{break};
-216             \textcolor{keywordflow}{default}:
-217                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} AssertionError(\textcolor{stringliteral}{"Incorrect UserAttribute enumeration type passed to method."});
-218         \}
-219         \textcolor{keywordflow}{try} \{
-220             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);
-221             stmt.setInt(1, \textcolor{keywordtype}{id});
-222             res = stmt.executeQuery();
-223             name = res.getString(columnLabel);
-224 
-225             stmt.close();
-226         \}
-227         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-228             System.err.println(e.getMessage());
-229             \textcolor{keywordflow}{return} null;
-230         \}
-231 
-232         \textcolor{keywordflow}{return} name;
-233     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{199                                                                                       \{}
+\DoxyCodeLine{200         String name;}
+\DoxyCodeLine{201         ResultSet res;}
+\DoxyCodeLine{202         String sqlQuery, columnLabel;}
+\DoxyCodeLine{203         \textcolor{keywordflow}{switch} (attribute) \{}
+\DoxyCodeLine{204             \textcolor{keywordflow}{case} PASSWORD:}
+\DoxyCodeLine{205                 columnLabel = \textcolor{stringliteral}{"password\_hash"};}
+\DoxyCodeLine{206                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Users WHERE id=?"};}
+\DoxyCodeLine{207                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{208             \textcolor{keywordflow}{case} NAME:}
+\DoxyCodeLine{209                 columnLabel = \textcolor{stringliteral}{"name"};}
+\DoxyCodeLine{210                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Users WHERE id=?"};}
+\DoxyCodeLine{211                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{212             \textcolor{keywordflow}{case} EMAIL\_ADDRESS:}
+\DoxyCodeLine{213                 columnLabel = \textcolor{stringliteral}{"email\_address"};}
+\DoxyCodeLine{214                 sqlQuery = \textcolor{stringliteral}{"SELECT "} + columnLabel + \textcolor{stringliteral}{" FROM Users WHERE id=?"};}
+\DoxyCodeLine{215                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{216             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{217                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} AssertionError(\textcolor{stringliteral}{"Incorrect UserAttribute enumeration type passed to method."});}
+\DoxyCodeLine{218         \}}
+\DoxyCodeLine{219         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{220             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);}
+\DoxyCodeLine{221             stmt.setInt(1, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{222             res = stmt.executeQuery();}
+\DoxyCodeLine{223             name = res.getString(columnLabel);}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225             stmt.close();}
+\DoxyCodeLine{226         \}}
+\DoxyCodeLine{227         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{228             System.err.println(e.getMessage());}
+\DoxyCodeLine{229             \textcolor{keywordflow}{return} \textcolor{keyword}{null};}
+\DoxyCodeLine{230         \}}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232         \textcolor{keywordflow}{return} name;}
+\DoxyCodeLine{233     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_a41df4600bb5901a26a4ea6a7108a70b9}\label{classcom_1_1activitytracker_1_1_d_b_manager_a41df4600bb5901a26a4ea6a7108a70b9}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!init@{init}}
-\index{init@{init}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!init@{init}}
+\index{init@{init}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
 \subsubsection{\texorpdfstring{init()}{init()}}
 {\footnotesize\ttfamily boolean com.\+activitytracker.\+D\+B\+Manager.\+init (\begin{DoxyParamCaption}\item[{final String}]{db\+U\+RL }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [package]}}
 
@@ -813,63 +825,64 @@ This method returns True if the database can be initialized, or False otherwise.
 Definition at line 814 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-814                                      \{
-815         \textcolor{keywordflow}{try} \{
-816             \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}} = DriverManager.getConnection(\textcolor{stringliteral}{"jdbc:sqlite:"} + dbURL);
-817         \}
-818         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-819             System.err.println(e.getMessage());
-820             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-821         \}
-822         System.out.println(\textcolor{stringliteral}{"Opened database successfully."});
-823 
-824         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_af9ab112f840e3c803b6b28a2f1a15215}{isEmpty}}()) \{
-825             System.out.println(\textcolor{stringliteral}{"Creating tables..."});
-826 
-827             \textcolor{comment}{// Create users table}
-828             String sqlQuery = \textcolor{stringliteral}{"CREATE TABLE USERS ("} +
-829                     \textcolor{stringliteral}{"    id            INTEGER PRIMARY KEY ASC AUTOINCREMENT NOT NULL,"} +
-830                     \textcolor{stringliteral}{"    email\_address STRING  NOT NULL UNIQUE ON CONFLICT FAIL,"} +
-831                     \textcolor{stringliteral}{"    name          STRING  NOT NULL,"} +
-832                     \textcolor{stringliteral}{"    date\_of\_birth DATETIME    NOT NULL,"} +
-833                     \textcolor{stringliteral}{"    sex           BIT(1)  NOT NULL,"} +
-834                     \textcolor{stringliteral}{"    height        REAL    NOT NULL,"} +
-835                     \textcolor{stringliteral}{"    weight        REAL    NOT NULL,"} +
-836                     \textcolor{stringliteral}{"    password\_hash STRING  NOT NULL,"} +
-837                     \textcolor{stringliteral}{"    password\_salt BLOB    NOT NULL,"} +
-838                     \textcolor{stringliteral}{"    last\_run      INTEGER NOT NULL DEFAULT 0,"} +
-839                     \textcolor{stringliteral}{"    created\_at    DATETIME    NOT NULL"} +
-840                     \textcolor{stringliteral}{")"};
-841 
-842             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a382397e2bdf309901d1c80ff66be69b7}{executeUpdate}}(sqlQuery)) \{
-843                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-844             \}
-845 
-846             \textcolor{comment}{// Create workouts table}
-847             sqlQuery = \textcolor{stringliteral}{"CREATE TABLE RUNS ("} +
-848                     \textcolor{stringliteral}{"    id                  INTEGER PRIMARY KEY ASC AUTOINCREMENT NOT NULL,"} +
-849                     \textcolor{stringliteral}{"    user\_id             INTEGER NOT NULL REFERENCES USERS (id),"} +
-850                     \textcolor{stringliteral}{"    date                DATETIME    NOT NULL,"} +
-851                     \textcolor{stringliteral}{"    duration            REAL    NOT NULL,"} + \textcolor{comment}{// seconds}
-852                     \textcolor{stringliteral}{"    distance            REAL    NOT NULL,"} + \textcolor{comment}{// metres}
-853                     \textcolor{stringliteral}{"    altitude\_ascended   REAL    NOT NULL,"} + \textcolor{comment}{// metres}
-854                     \textcolor{stringliteral}{"    altitude\_descended  REAL    NOT NULL"} + \textcolor{comment}{// metres}
-855                     \textcolor{stringliteral}{")"};
-856 
-857             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a382397e2bdf309901d1c80ff66be69b7}{executeUpdate}}(sqlQuery)) \{
-858                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-859             \}
-860 
-861         \}
-862 
-863         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-864     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{814                                      \{}
+\DoxyCodeLine{815         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{816             \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}} = DriverManager.getConnection(\textcolor{stringliteral}{"jdbc:sqlite:"} + dbURL);}
+\DoxyCodeLine{817         \}}
+\DoxyCodeLine{818         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{819             System.err.println(e.getMessage());}
+\DoxyCodeLine{820             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{821         \}}
+\DoxyCodeLine{822         System.out.println(\textcolor{stringliteral}{"Opened database successfully."});}
+\DoxyCodeLine{823 }
+\DoxyCodeLine{824         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_af9ab112f840e3c803b6b28a2f1a15215}{isEmpty}}()) \{}
+\DoxyCodeLine{825             System.out.println(\textcolor{stringliteral}{"Creating tables..."});}
+\DoxyCodeLine{826 }
+\DoxyCodeLine{827             \textcolor{comment}{// Create users table}}
+\DoxyCodeLine{828             String sqlQuery = \textcolor{stringliteral}{"CREATE TABLE USERS ("} +}
+\DoxyCodeLine{829                     \textcolor{stringliteral}{"    id            INTEGER PRIMARY KEY ASC AUTOINCREMENT NOT NULL,"} +}
+\DoxyCodeLine{830                     \textcolor{stringliteral}{"    email\_address STRING  NOT NULL UNIQUE ON CONFLICT FAIL,"} +}
+\DoxyCodeLine{831                     \textcolor{stringliteral}{"    name          STRING  NOT NULL,"} +}
+\DoxyCodeLine{832                     \textcolor{stringliteral}{"    date\_of\_birth DATETIME    NOT NULL,"} +}
+\DoxyCodeLine{833                     \textcolor{stringliteral}{"    sex           BIT(1)  NOT NULL,"} +}
+\DoxyCodeLine{834                     \textcolor{stringliteral}{"    height        REAL    NOT NULL,"} +}
+\DoxyCodeLine{835                     \textcolor{stringliteral}{"    weight        REAL    NOT NULL,"} +}
+\DoxyCodeLine{836                     \textcolor{stringliteral}{"    password\_hash STRING  NOT NULL,"} +}
+\DoxyCodeLine{837                     \textcolor{stringliteral}{"    password\_salt BLOB    NOT NULL,"} +}
+\DoxyCodeLine{838                     \textcolor{stringliteral}{"    last\_run      INTEGER NOT NULL DEFAULT 0,"} +}
+\DoxyCodeLine{839                     \textcolor{stringliteral}{"    created\_at    DATETIME    NOT NULL"} +}
+\DoxyCodeLine{840                     \textcolor{stringliteral}{")"};}
+\DoxyCodeLine{841 }
+\DoxyCodeLine{842             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a382397e2bdf309901d1c80ff66be69b7}{executeUpdate}}(sqlQuery)) \{}
+\DoxyCodeLine{843                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{844             \}}
+\DoxyCodeLine{845 }
+\DoxyCodeLine{846             \textcolor{comment}{// Create workouts table}}
+\DoxyCodeLine{847             sqlQuery = \textcolor{stringliteral}{"CREATE TABLE RUNS ("} +}
+\DoxyCodeLine{848                     \textcolor{stringliteral}{"    id                  INTEGER PRIMARY KEY ASC AUTOINCREMENT NOT NULL,"} +}
+\DoxyCodeLine{849                     \textcolor{stringliteral}{"    user\_id             INTEGER NOT NULL REFERENCES USERS (id),"} +}
+\DoxyCodeLine{850                     \textcolor{stringliteral}{"    date                DATETIME    NOT NULL,"} +}
+\DoxyCodeLine{851                     \textcolor{stringliteral}{"    duration            REAL    NOT NULL,"} + \textcolor{comment}{// seconds}}
+\DoxyCodeLine{852                     \textcolor{stringliteral}{"    distance            REAL    NOT NULL,"} + \textcolor{comment}{// metres}}
+\DoxyCodeLine{853                     \textcolor{stringliteral}{"    altitude\_ascended   REAL    NOT NULL,"} + \textcolor{comment}{// metres}}
+\DoxyCodeLine{854                     \textcolor{stringliteral}{"    altitude\_descended  REAL    NOT NULL"} + \textcolor{comment}{// metres}}
+\DoxyCodeLine{855                     \textcolor{stringliteral}{")"};}
+\DoxyCodeLine{856 }
+\DoxyCodeLine{857             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a382397e2bdf309901d1c80ff66be69b7}{executeUpdate}}(sqlQuery)) \{}
+\DoxyCodeLine{858                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{859             \}}
+\DoxyCodeLine{860 }
+\DoxyCodeLine{861         \}}
+\DoxyCodeLine{862 }
+\DoxyCodeLine{863         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{864     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_af9ab112f840e3c803b6b28a2f1a15215}\label{classcom_1_1activitytracker_1_1_d_b_manager_af9ab112f840e3c803b6b28a2f1a15215}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!is\+Empty@{is\+Empty}}
-\index{is\+Empty@{is\+Empty}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{is\+Empty()}{isEmpty()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!isEmpty@{isEmpty}}
+\index{isEmpty@{isEmpty}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{isEmpty()}{isEmpty()}}
 {\footnotesize\ttfamily boolean com.\+activitytracker.\+D\+B\+Manager.\+is\+Empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 Returns a boolean value depending on whether or not the database is populated.
@@ -884,27 +897,28 @@ Returns True if there are tables in the database, False otherwise.
 Definition at line 782 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-782                               \{
-783 
-784         \textcolor{keywordflow}{try} \{
-785             \textcolor{keyword}{final} DatabaseMetaData dbmd = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.getMetaData();
-786             \textcolor{keyword}{final} String[] types = \{\textcolor{stringliteral}{"TABLE"}\};
-787             \textcolor{keyword}{final} ResultSet rs = dbmd.getTables(null, null, \textcolor{stringliteral}{"%"}, types);
-788 
-789             \textcolor{keywordflow}{return} !rs.next();
-790         \}
-791         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-792             System.err.println(e.getMessage());
-793             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-794         \}
-795 
-796     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{782                               \{}
+\DoxyCodeLine{783 }
+\DoxyCodeLine{784         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{785             \textcolor{keyword}{final} DatabaseMetaData dbmd = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.getMetaData();}
+\DoxyCodeLine{786             \textcolor{keyword}{final} String[] types = \{\textcolor{stringliteral}{"TABLE"}\};}
+\DoxyCodeLine{787             \textcolor{keyword}{final} ResultSet rs = dbmd.getTables(\textcolor{keyword}{null}, \textcolor{keyword}{null}, \textcolor{stringliteral}{"\%"}, types);}
+\DoxyCodeLine{788 }
+\DoxyCodeLine{789             \textcolor{keywordflow}{return} !rs.next();}
+\DoxyCodeLine{790         \}}
+\DoxyCodeLine{791         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{792             System.err.println(e.getMessage());}
+\DoxyCodeLine{793             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{794         \}}
+\DoxyCodeLine{795 }
+\DoxyCodeLine{796     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_ae0504a939b6f165aa5c3cca9eb8df049}\label{classcom_1_1activitytracker_1_1_d_b_manager_ae0504a939b6f165aa5c3cca9eb8df049}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!new\+Run@{new\+Run}}
-\index{new\+Run@{new\+Run}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{new\+Run()}{newRun()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!newRun@{newRun}}
+\index{newRun@{newRun}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{newRun()}{newRun()}}
 {\footnotesize\ttfamily int com.\+activitytracker.\+D\+B\+Manager.\+new\+Run (\begin{DoxyParamCaption}\item[{final int}]{user\+ID,  }\item[{final java.\+util.\+Date}]{date,  }\item[{final float}]{duration,  }\item[{final float}]{distance,  }\item[{final float}]{altitude\+Ascended,  }\item[{final float}]{altitude\+Descended }\end{DoxyParamCaption})}
 
 Creates a new row in the Runs table with the attributes provided as parameters.
@@ -934,66 +948,67 @@ Returns a unique integer corresponding to the new row in the S\+Q\+Lite Workouts
 Definition at line 453 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-454                                                                                    \{
-455 
-456         \textcolor{keywordtype}{int} rID = 0;
-457         ResultSet res;
-458         String sqlInsertQuery = \textcolor{stringliteral}{"INSERT INTO Runs ("} +
-459                 \textcolor{stringliteral}{"user\_id,"} +
-460                 \textcolor{stringliteral}{"date,"} +
-461                 \textcolor{stringliteral}{"duration,"} +
-462                 \textcolor{stringliteral}{"distance,"} +
-463                 \textcolor{stringliteral}{"altitude\_ascended,"} +
-464                 \textcolor{stringliteral}{"altitude\_descended"} +
-465                 \textcolor{stringliteral}{") VALUES (?, ?, ?, ?, ?, ?)"};
-466         String sqlSelectQuery = \textcolor{stringliteral}{"SELECT id FROM Runs WHERE "} +
-467                 \textcolor{stringliteral}{"user\_id=? AND "} +
-468                 \textcolor{stringliteral}{"date=? AND "} +
-469                 \textcolor{stringliteral}{"duration=? AND "} +
-470                 \textcolor{stringliteral}{"distance=? AND "} +
-471                 \textcolor{stringliteral}{"altitude\_ascended=? AND "} +
-472                 \textcolor{stringliteral}{"altitude\_descended=?"};
-473 
-474         \textcolor{keywordflow}{try} \{
-475             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlInsertQuery);
-476             stmt.setInt(1, userID);
-477             stmt.setLong(2, date.getTime());
-478             stmt.setFloat(3, duration);
-479             stmt.setFloat(4, distance);
-480             stmt.setFloat(5, altitudeAscended);
-481             stmt.setFloat(6, altitudeDescended);
-482 
-483             \textcolor{keywordflow}{if} (stmt.executeUpdate() != 1) \{
-484                 System.err.println(\textcolor{stringliteral}{"Run not added to database."});
-485             \}
-486 
-487             stmt.close();
-488 
-489             \textcolor{comment}{// Pass back in the stuff we just created to get the right row ID}
-490             \textcolor{comment}{// Look at a better way of doing this with OUTPUT clause of INPUT statement}
-491             stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlSelectQuery);
-492             stmt.setInt(1, userID);
-493             stmt.setLong(2, date.getTime());
-494             stmt.setFloat(3, duration);
-495             stmt.setFloat(4, distance);
-496             stmt.setFloat(5, altitudeAscended);
-497             stmt.setFloat(6, altitudeDescended);
-498 
-499             res = stmt.executeQuery();
-500             rID = res.getInt(\textcolor{stringliteral}{"id"});
-501         \}
-502         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-503             System.err.println(e.getMessage());
-504         \}
-505 
-506         \textcolor{keywordflow}{return} rID;
-507     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{454                                                                                    \{}
+\DoxyCodeLine{455 }
+\DoxyCodeLine{456         \textcolor{keywordtype}{int} rID = 0;}
+\DoxyCodeLine{457         ResultSet res;}
+\DoxyCodeLine{458         String sqlInsertQuery = \textcolor{stringliteral}{"INSERT INTO Runs ("} +}
+\DoxyCodeLine{459                 \textcolor{stringliteral}{"user\_id,"} +}
+\DoxyCodeLine{460                 \textcolor{stringliteral}{"date,"} +}
+\DoxyCodeLine{461                 \textcolor{stringliteral}{"duration,"} +}
+\DoxyCodeLine{462                 \textcolor{stringliteral}{"distance,"} +}
+\DoxyCodeLine{463                 \textcolor{stringliteral}{"altitude\_ascended,"} +}
+\DoxyCodeLine{464                 \textcolor{stringliteral}{"altitude\_descended"} +}
+\DoxyCodeLine{465                 \textcolor{stringliteral}{") VALUES (?, ?, ?, ?, ?, ?)"};}
+\DoxyCodeLine{466         String sqlSelectQuery = \textcolor{stringliteral}{"SELECT id FROM Runs WHERE "} +}
+\DoxyCodeLine{467                 \textcolor{stringliteral}{"user\_id=? AND "} +}
+\DoxyCodeLine{468                 \textcolor{stringliteral}{"date=? AND "} +}
+\DoxyCodeLine{469                 \textcolor{stringliteral}{"duration=? AND "} +}
+\DoxyCodeLine{470                 \textcolor{stringliteral}{"distance=? AND "} +}
+\DoxyCodeLine{471                 \textcolor{stringliteral}{"altitude\_ascended=? AND "} +}
+\DoxyCodeLine{472                 \textcolor{stringliteral}{"altitude\_descended=?"};}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{475             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlInsertQuery);}
+\DoxyCodeLine{476             stmt.setInt(1, userID);}
+\DoxyCodeLine{477             stmt.setLong(2, date.getTime());}
+\DoxyCodeLine{478             stmt.setFloat(3, duration);}
+\DoxyCodeLine{479             stmt.setFloat(4, distance);}
+\DoxyCodeLine{480             stmt.setFloat(5, altitudeAscended);}
+\DoxyCodeLine{481             stmt.setFloat(6, altitudeDescended);}
+\DoxyCodeLine{482 }
+\DoxyCodeLine{483             \textcolor{keywordflow}{if} (stmt.executeUpdate() != 1) \{}
+\DoxyCodeLine{484                 System.err.println(\textcolor{stringliteral}{"Run not added to database."});}
+\DoxyCodeLine{485             \}}
+\DoxyCodeLine{486 }
+\DoxyCodeLine{487             stmt.close();}
+\DoxyCodeLine{488 }
+\DoxyCodeLine{489             \textcolor{comment}{// Pass back in the stuff we just created to get the right row ID}}
+\DoxyCodeLine{490             \textcolor{comment}{// Look at a better way of doing this with OUTPUT clause of INPUT statement}}
+\DoxyCodeLine{491             stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlSelectQuery);}
+\DoxyCodeLine{492             stmt.setInt(1, userID);}
+\DoxyCodeLine{493             stmt.setLong(2, date.getTime());}
+\DoxyCodeLine{494             stmt.setFloat(3, duration);}
+\DoxyCodeLine{495             stmt.setFloat(4, distance);}
+\DoxyCodeLine{496             stmt.setFloat(5, altitudeAscended);}
+\DoxyCodeLine{497             stmt.setFloat(6, altitudeDescended);}
+\DoxyCodeLine{498 }
+\DoxyCodeLine{499             res = stmt.executeQuery();}
+\DoxyCodeLine{500             rID = res.getInt(\textcolor{stringliteral}{"id"});}
+\DoxyCodeLine{501         \}}
+\DoxyCodeLine{502         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{503             System.err.println(e.getMessage());}
+\DoxyCodeLine{504         \}}
+\DoxyCodeLine{505 }
+\DoxyCodeLine{506         \textcolor{keywordflow}{return} rID;}
+\DoxyCodeLine{507     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_a723ac1c573bacdd0b62894357bd65a9b}\label{classcom_1_1activitytracker_1_1_d_b_manager_a723ac1c573bacdd0b62894357bd65a9b}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!run\+Exists@{run\+Exists}}
-\index{run\+Exists@{run\+Exists}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{run\+Exists()}{runExists()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!runExists@{runExists}}
+\index{runExists@{runExists}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{runExists()}{runExists()}}
 {\footnotesize\ttfamily boolean com.\+activitytracker.\+D\+B\+Manager.\+run\+Exists (\begin{DoxyParamCaption}\item[{final int}]{r\+ID }\end{DoxyParamCaption})}
 
 Determines if a given run ID exists in the database.
@@ -1011,41 +1026,42 @@ This method returns True if the run row with ID {\itshape W\+O\+ID} exists in th
 Definition at line 652 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-652                                             \{
-653         ResultSet res;
-654         String sqlQuery = \textcolor{stringliteral}{"SELECT COUNT(*) as count FROM Runs WHERE id=?"};
-655         \textcolor{keywordtype}{boolean} exists = \textcolor{keyword}{false};
-656         \textcolor{keywordflow}{try} \{
-657             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);
-658             stmt.setInt(1, rID);
-659             res = stmt.executeQuery();
-660             \textcolor{keywordflow}{switch} (res.getInt(\textcolor{stringliteral}{"count"})) \{
-661                 \textcolor{keywordflow}{case} 0:
-662                     exists = \textcolor{keyword}{false};
-663                     \textcolor{keywordflow}{break};
-664                 \textcolor{keywordflow}{case} 1:
-665                     exists = \textcolor{keyword}{true};
-666                     \textcolor{keywordflow}{break};
-667                 \textcolor{keywordflow}{default}:
-668                     exists = \textcolor{keyword}{true};
-669                     System.err.println(\textcolor{stringliteral}{"More than one run for ID "} +
-670                             Integer.toString(rID) + \textcolor{stringliteral}{". Something isn't right."});
-671                     \textcolor{keywordflow}{break};
-672             \}
-673 
-674         \}
-675         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-676             System.err.println(e.getMessage());
-677         \}
-678 
-679         \textcolor{keywordflow}{return} exists;
-680     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{652                                             \{}
+\DoxyCodeLine{653         ResultSet res;}
+\DoxyCodeLine{654         String sqlQuery = \textcolor{stringliteral}{"SELECT COUNT(*) as count FROM Runs WHERE id=?"};}
+\DoxyCodeLine{655         \textcolor{keywordtype}{boolean} exists = \textcolor{keyword}{false};}
+\DoxyCodeLine{656         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{657             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);}
+\DoxyCodeLine{658             stmt.setInt(1, rID);}
+\DoxyCodeLine{659             res = stmt.executeQuery();}
+\DoxyCodeLine{660             \textcolor{keywordflow}{switch} (res.getInt(\textcolor{stringliteral}{"count"})) \{}
+\DoxyCodeLine{661                 \textcolor{keywordflow}{case} 0:}
+\DoxyCodeLine{662                     exists = \textcolor{keyword}{false};}
+\DoxyCodeLine{663                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{664                 \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{665                     exists = \textcolor{keyword}{true};}
+\DoxyCodeLine{666                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{667                 \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{668                     exists = \textcolor{keyword}{true};}
+\DoxyCodeLine{669                     System.err.println(\textcolor{stringliteral}{"More than one run for ID "} +}
+\DoxyCodeLine{670                             Integer.toString(rID) + \textcolor{stringliteral}{". Something isn't right."});}
+\DoxyCodeLine{671                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{672             \}}
+\DoxyCodeLine{673 }
+\DoxyCodeLine{674         \}}
+\DoxyCodeLine{675         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{676             System.err.println(e.getMessage());}
+\DoxyCodeLine{677         \}}
+\DoxyCodeLine{678 }
+\DoxyCodeLine{679         \textcolor{keywordflow}{return} exists;}
+\DoxyCodeLine{680     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_aa088e156858d8d661e2f43c1054c51c8}\label{classcom_1_1activitytracker_1_1_d_b_manager_aa088e156858d8d661e2f43c1054c51c8}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!set\+Run@{set\+Run}}
-\index{set\+Run@{set\+Run}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{set\+Run()}{setRun()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!setRun@{setRun}}
+\index{setRun@{setRun}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{setRun()}{setRun()}}
 {\footnotesize\ttfamily void com.\+activitytracker.\+D\+B\+Manager.\+set\+Run (\begin{DoxyParamCaption}\item[{final int}]{r\+ID,  }\item[{final float}]{duration,  }\item[{final float}]{distance,  }\item[{final float}]{altitude\+Ascended,  }\item[{final float}]{altitude\+Descended }\end{DoxyParamCaption})}
 
 Updates a run entry in the database as new information becomes available from the input file.
@@ -1072,40 +1088,41 @@ This method will not be called directly by the application, rather it is called 
 Definition at line 526 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-527                                                                                            \{
-528         String sqlQuery = \textcolor{stringliteral}{"UPDATE Runs SET "} +
-529                 \textcolor{stringliteral}{"duration = ?, "} +
-530                 \textcolor{stringliteral}{"distance = ?, "} +
-531                 \textcolor{stringliteral}{"altitude\_ascended=?, "} +
-532                 \textcolor{stringliteral}{"altitude\_descended=? "} +
-533                 \textcolor{stringliteral}{"WHERE id=? "};
-534         \textcolor{keywordflow}{try} \{
-535             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);
-536             stmt.setFloat(1, duration);
-537             stmt.setFloat(2, distance);
-538             stmt.setFloat(3, altitudeAscended);
-539             stmt.setFloat(4, altitudeDescended);
-540             stmt.setInt(5, rID);
-541 
-542             \textcolor{keywordtype}{int} result = stmt.executeUpdate();
-543             System.err.println(Integer.toString(result) + \textcolor{stringliteral}{" rows updated in setRun()."});
-544             \textcolor{keywordflow}{if} (result != 1) \{
-545                 System.err.println(\textcolor{stringliteral}{"Run not updated in database."});
-546             \}
-547 
-548             stmt.close();
-549         \}
-550         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-551             System.err.println(e.getMessage());
-552         \}
-553 
-554     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{527                                                                                            \{}
+\DoxyCodeLine{528         String sqlQuery = \textcolor{stringliteral}{"UPDATE Runs SET "} +}
+\DoxyCodeLine{529                 \textcolor{stringliteral}{"duration = ?, "} +}
+\DoxyCodeLine{530                 \textcolor{stringliteral}{"distance = ?, "} +}
+\DoxyCodeLine{531                 \textcolor{stringliteral}{"altitude\_ascended=?, "} +}
+\DoxyCodeLine{532                 \textcolor{stringliteral}{"altitude\_descended=? "} +}
+\DoxyCodeLine{533                 \textcolor{stringliteral}{"WHERE id=? "};}
+\DoxyCodeLine{534         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{535             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);}
+\DoxyCodeLine{536             stmt.setFloat(1, duration);}
+\DoxyCodeLine{537             stmt.setFloat(2, distance);}
+\DoxyCodeLine{538             stmt.setFloat(3, altitudeAscended);}
+\DoxyCodeLine{539             stmt.setFloat(4, altitudeDescended);}
+\DoxyCodeLine{540             stmt.setInt(5, rID);}
+\DoxyCodeLine{541 }
+\DoxyCodeLine{542             \textcolor{keywordtype}{int} result = stmt.executeUpdate();}
+\DoxyCodeLine{543             System.err.println(Integer.toString(result) + \textcolor{stringliteral}{" rows updated in setRun()."});}
+\DoxyCodeLine{544             \textcolor{keywordflow}{if} (result != 1) \{}
+\DoxyCodeLine{545                 System.err.println(\textcolor{stringliteral}{"Run not updated in database."});}
+\DoxyCodeLine{546             \}}
+\DoxyCodeLine{547 }
+\DoxyCodeLine{548             stmt.close();}
+\DoxyCodeLine{549         \}}
+\DoxyCodeLine{550         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{551             System.err.println(e.getMessage());}
+\DoxyCodeLine{552         \}}
+\DoxyCodeLine{553 }
+\DoxyCodeLine{554     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_a93b7fc4c2d0083e125852d84f087a8d3}\label{classcom_1_1activitytracker_1_1_d_b_manager_a93b7fc4c2d0083e125852d84f087a8d3}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!set\+User\+Last\+R\+ID@{set\+User\+Last\+R\+ID}}
-\index{set\+User\+Last\+R\+ID@{set\+User\+Last\+R\+ID}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{set\+User\+Last\+R\+I\+D()}{setUserLastRID()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!setUserLastRID@{setUserLastRID}}
+\index{setUserLastRID@{setUserLastRID}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{setUserLastRID()}{setUserLastRID()}}
 {\footnotesize\ttfamily void com.\+activitytracker.\+D\+B\+Manager.\+set\+User\+Last\+R\+ID (\begin{DoxyParamCaption}\item[{final int}]{id,  }\item[{final int}]{last\+R\+ID }\end{DoxyParamCaption})}
 
 Updates a user\textquotesingle{}s last run ID in the database.
@@ -1126,26 +1143,27 @@ See \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_aab14c61b3f3a17
 Definition at line 422 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-422                                                                 \{
-423         String sqlQuery = \textcolor{stringliteral}{"UPDATE Users SET last\_run=? WHERE id=?"};
-424         \textcolor{keywordflow}{try} \{
-425             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);
-426             stmt.setInt(1, lastRID);
-427             stmt.setInt(2, \textcolor{keywordtype}{id});
-428             \textcolor{keywordflow}{if} (stmt.executeUpdate() != 1) \{
-429                 System.err.println(\textcolor{stringliteral}{"User's last run was not updated correctly."});
-430             \}
-431         \}
-432         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-433             System.err.println(e.getMessage());
-434         \}
-435     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{422                                                                 \{}
+\DoxyCodeLine{423         String sqlQuery = \textcolor{stringliteral}{"UPDATE Users SET last\_run=? WHERE id=?"};}
+\DoxyCodeLine{424         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{425             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);}
+\DoxyCodeLine{426             stmt.setInt(1, lastRID);}
+\DoxyCodeLine{427             stmt.setInt(2, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{428             \textcolor{keywordflow}{if} (stmt.executeUpdate() != 1) \{}
+\DoxyCodeLine{429                 System.err.println(\textcolor{stringliteral}{"User's last run was not updated correctly."});}
+\DoxyCodeLine{430             \}}
+\DoxyCodeLine{431         \}}
+\DoxyCodeLine{432         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{433             System.err.println(e.getMessage());}
+\DoxyCodeLine{434         \}}
+\DoxyCodeLine{435     \}}
+
 \end{DoxyCode}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_af05d79f33ecf2920a67d1b9cf82c079f}\label{classcom_1_1activitytracker_1_1_d_b_manager_af05d79f33ecf2920a67d1b9cf82c079f}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!user\+Exists@{user\+Exists}}
-\index{user\+Exists@{user\+Exists}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{user\+Exists()}{userExists()}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!userExists@{userExists}}
+\index{userExists@{userExists}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{userExists()}{userExists()}}
 {\footnotesize\ttfamily boolean com.\+activitytracker.\+D\+B\+Manager.\+user\+Exists (\begin{DoxyParamCaption}\item[{final String}]{email\+Address }\end{DoxyParamCaption})}
 
 The \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_af05d79f33ecf2920a67d1b9cf82c079f}{D\+B\+Manager\+::user\+Exists()}} method is designed to facilitate the user experience (UX) design choice of users creating one account to the app and logging in with an existing account for future use. This maintains saved (persistent) data and helps enforce the unique constraint placed on the {\itshape email\+\_\+address} field in the database (again, as users are authenticating using their email address as a user name to identify themselves).
@@ -1163,33 +1181,34 @@ True if the user exists in the database, false otherwise.
 Definition at line 120 of file D\+B\+Manager.\+java.
 
 
-\begin{DoxyCode}
-120                                                           \{
-121         String sqlQuery = \textcolor{stringliteral}{"SELECT COUNT(*) AS count FROM Users WHERE `email\_address`=?"};
-122         \textcolor{keywordtype}{boolean} exists = \textcolor{keyword}{false};
-123 
-124         \textcolor{keywordflow}{try} \{
-125             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);
-126             stmt.setString(1, emailAddress);
-127             ResultSet res = stmt.executeQuery();
-128             exists = res.getInt(\textcolor{stringliteral}{"count"}) > 0;
-129 
-130             stmt.close();
-131         \}
-132         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{
-133             System.err.println(e.getMessage());
-134         \}
-135 
-136         \textcolor{keywordflow}{return} exists;
-137     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{120                                                           \{}
+\DoxyCodeLine{121         String sqlQuery = \textcolor{stringliteral}{"SELECT COUNT(*) AS count FROM Users WHERE `email\_address`=?"};}
+\DoxyCodeLine{122         \textcolor{keywordtype}{boolean} exists = \textcolor{keyword}{false};}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{125             PreparedStatement stmt = \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}{m\_conn}}.prepareStatement(sqlQuery);}
+\DoxyCodeLine{126             stmt.setString(1, emailAddress);}
+\DoxyCodeLine{127             ResultSet res = stmt.executeQuery();}
+\DoxyCodeLine{128             exists = res.getInt(\textcolor{stringliteral}{"count"}) > 0;}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130             stmt.close();}
+\DoxyCodeLine{131         \}}
+\DoxyCodeLine{132         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} SQLException e) \{}
+\DoxyCodeLine{133             System.err.println(e.getMessage());}
+\DoxyCodeLine{134         \}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136         \textcolor{keywordflow}{return} exists;}
+\DoxyCodeLine{137     \}}
+
 \end{DoxyCode}
 
 
 \subsection{Member Data Documentation}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}\label{classcom_1_1activitytracker_1_1_d_b_manager_a064088d13ac09eb147fdc19268771521}} 
-\index{com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}!m\+\_\+conn@{m\+\_\+conn}}
-\index{m\+\_\+conn@{m\+\_\+conn}!com\+::activitytracker\+::\+D\+B\+Manager@{com\+::activitytracker\+::\+D\+B\+Manager}}
-\subsubsection{\texorpdfstring{m\+\_\+conn}{m\_conn}}
+\index{com.activitytracker.DBManager@{com.activitytracker.DBManager}!m\_conn@{m\_conn}}
+\index{m\_conn@{m\_conn}!com.activitytracker.DBManager@{com.activitytracker.DBManager}}
+\subsubsection{\texorpdfstring{m\_conn}{m\_conn}}
 {\footnotesize\ttfamily Connection com.\+activitytracker.\+D\+B\+Manager.\+m\+\_\+conn = null\hspace{0.3cm}{\ttfamily [private]}}
 
 The {\itshape m\+\_\+conn} variable in the \mbox{\hyperlink{classcom_1_1activitytracker_1_1_d_b_manager}{D\+B\+Manager}} class is initially assigned the value of {\itshape null}.

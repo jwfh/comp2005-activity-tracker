@@ -1,5 +1,5 @@
 \hypertarget{classcom_1_1activitytracker_1_1_iteration3_test}{}\section{com.\+activitytracker.\+Iteration3\+Test Class Reference}
-\label{classcom_1_1activitytracker_1_1_iteration3_test}\index{com.\+activitytracker.\+Iteration3\+Test@{com.\+activitytracker.\+Iteration3\+Test}}
+\label{classcom_1_1activitytracker_1_1_iteration3_test}\index{com.activitytracker.Iteration3Test@{com.activitytracker.Iteration3Test}}
 
 
 Collaboration diagram for com.\+activitytracker.\+Iteration3\+Test\+:
@@ -26,8 +26,8 @@ Definition at line 12 of file Iteration3\+Test.\+java.
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classcom_1_1activitytracker_1_1_iteration3_test_a54f41d79b383667b8f79258dbfd7771c}\label{classcom_1_1activitytracker_1_1_iteration3_test_a54f41d79b383667b8f79258dbfd7771c}} 
-\index{com\+::activitytracker\+::\+Iteration3\+Test@{com\+::activitytracker\+::\+Iteration3\+Test}!main@{main}}
-\index{main@{main}!com\+::activitytracker\+::\+Iteration3\+Test@{com\+::activitytracker\+::\+Iteration3\+Test}}
+\index{com.activitytracker.Iteration3Test@{com.activitytracker.Iteration3Test}!main@{main}}
+\index{main@{main}!com.activitytracker.Iteration3Test@{com.activitytracker.Iteration3Test}}
 \subsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily static void com.\+activitytracker.\+Iteration3\+Test.\+main (\begin{DoxyParamCaption}\item[{String \mbox{[}$\,$\mbox{]}}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
@@ -36,139 +36,138 @@ Definition at line 12 of file Iteration3\+Test.\+java.
 Definition at line 14 of file Iteration3\+Test.\+java.
 
 
-\begin{DoxyCode}
-14                                            \{
-15 
-16         \textcolor{comment}{// Iteration 1 begins here}
-17 
-18         User john = null;
-19 
-20         DBManager dbManager = \textcolor{keyword}{new} DBManager();
-21         \textcolor{keywordflow}{if} (!dbManager.init(\textcolor{stringliteral}{"data.db"})) \{
-22             System.err.println(\textcolor{stringliteral}{"Failed to initialize DBManager"});
-23             System.exit(1);
-24         \}
-25 
-26         System.out.println(\textcolor{stringliteral}{"Attempting to create user..."});
-27 
-28         \textcolor{keywordflow}{if} (!dbManager.userExists(\textcolor{stringliteral}{"jdoe@mac.com"})) \{
-29             Date dob = null;
-30             DateFormat sourceFormat = \textcolor{keyword}{new} SimpleDateFormat(\textcolor{stringliteral}{"dd-MM-yyyy"});
-31             \textcolor{keywordflow}{try} \{
-32                 dob = sourceFormat.parse(\textcolor{stringliteral}{"03-04-1978"});
-33             \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} ParseException e) \{
-34                 System.err.println(e.getMessage());
-35             \}
-36 
-37             User.createUser(
-38                     dbManager,
-39                     \textcolor{stringliteral}{"John Doe"},
-40                     \textcolor{stringliteral}{"jdoe@mac.com"},
-41                     dob,
-42                     User.Sex.MALE,
-43                     1.6764f,
-44                     54.4310844f,
-45                     \textcolor{stringliteral}{"My Very Secure Password"}
-46             );
-47         \}
-48         \textcolor{keywordflow}{else}
-49             System.out.println(\textcolor{stringliteral}{"User already exists."});
-50 
-51 
-52 
-53         \textcolor{keywordflow}{if} (dbManager.userExists(\textcolor{stringliteral}{"jdoe@mac.com"}))
-54             System.out.println(\textcolor{stringliteral}{"John Doe was created!"});
-55         \textcolor{keywordflow}{else}
-56             System.out.println(\textcolor{stringliteral}{"User was NOT created."});
-57 
-58 
-59         System.out.println(\textcolor{stringliteral}{"Testing incorrect password..."});
-60 
-61         \textcolor{keywordflow}{try} \{
-62             john = \textcolor{keyword}{new} User(dbManager,\textcolor{stringliteral}{"jdoe@mac.com"}, \textcolor{stringliteral}{"Some Incorrect Password"});
-63         \}
-64         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} AuthenticationException e) \{
-65             System.out.println(\textcolor{stringliteral}{"Incorrect password used; authentication failed."});
-66         \}
-67 
-68         System.out.println(\textcolor{stringliteral}{"Authenticating user..."});
-69 
-70         \textcolor{keywordflow}{try} \{
-71             john = \textcolor{keyword}{new} User(dbManager,\textcolor{stringliteral}{"jdoe@mac.com"}, \textcolor{stringliteral}{"My Very Secure Password"});
-72         \}
-73         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} AuthenticationException e) \{
-74             System.out.println(\textcolor{stringliteral}{"Test failed; user could not be authenticated."});
-75         \}
-76 
-77         \textcolor{comment}{// Iteration 1 ended here}
-78 
-79         \textcolor{comment}{// Iteration 2 begins here}
-80 
-81         \textcolor{keywordflow}{if} (john !=  null) \{
-82             Date today = \textcolor{keyword}{new} Date();
-83             \textcolor{keywordflow}{try} \{
-84                 Run.bulkImport(dbManager, john, \textcolor{stringliteral}{"/Users/jacobhouse/Google Drive File Stream/My
-       Drive/Documents/Courses/Computer Science/COMP-2005 Software Engineering/Final
-       Project/comp2005-activity-tracker/app/InputWO.csv"});
-85             \}
-86             \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} IOException e) \{
-87                 System.err.println(e.getMessage());
-88             \}
-89         \}
-90         \textcolor{keywordflow}{else} \{
-91             System.out.println(\textcolor{stringliteral}{"John is null. Cannot execute phase 2."});
-92         \}
-93 
-94         \textcolor{comment}{// Iteration 2 ends here}
-95         \textcolor{comment}{// Iteration 3 begins here}
-96 
-97         Date date = null;
-98         DateFormat sourceFormat = \textcolor{keyword}{new} SimpleDateFormat(\textcolor{stringliteral}{"dd-MM-yyyy"});
-99 
-100         \textcolor{keywordflow}{try} \{
-101             date = sourceFormat.parse(\textcolor{stringliteral}{"01-01-2018"});
-102         \}
-103         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} ParseException e) \{
-104             System.err.println(e.getMessage());
-105         \}
-106 
-107         Vector<Run> runs = Run.getRuns(dbManager, john, date, \textcolor{keyword}{new} Date());
-108 
-109         \textcolor{keywordflow}{if} (runs == null) \{
-110             System.out.println(\textcolor{stringliteral}{"Runs is null."});
-111         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (runs.size() == 0)
-112             System.err.println(\textcolor{stringliteral}{"No runs in vector."});
-113         \textcolor{keywordflow}{else} \{
-114             \textcolor{keywordflow}{for} (Run run : runs) \{
-115                 System.out.println(\textcolor{stringliteral}{"Retrieved run with ID "} + Integer.toString(run.getID()));
-116                 System.out.println(\textcolor{stringliteral}{"Run duration: "} + Float.toString(run.getDuration()));
-117                 System.out.println(\textcolor{stringliteral}{"Run distance: "} + Float.toString(run.getDistance()));
-118                 System.out.println(\textcolor{stringliteral}{"Run speed: "} + Float.toString(run.getSpeed()));
-119                 System.out.println(\textcolor{stringliteral}{"Run altitude ascended: "} + run.getAltitudeAscended());
-120                 System.out.println(\textcolor{stringliteral}{"Run altitude descended: "} + run.getAltitudeDescended());
-121                 System.out.println(\textcolor{stringliteral}{"Run date: "} + run.getRunDate().toString());
-122                 System.out.println();
-123             \}
-124         \}
-125 
-126         RunStats stats = \textcolor{keyword}{new} RunStats(runs);
-127         \textcolor{keywordflow}{if} (!stats.isEmpty()) \{
-128             System.out.println(\textcolor{stringliteral}{"Average run speed: "} + stats.getMeanSpeed());
-129             System.out.println(\textcolor{stringliteral}{"Average run duration: "} + stats.getMeanDuration());
-130             System.out.println(\textcolor{stringliteral}{"Average run distance: "} + stats.getMeanDistance());
-131             System.out.println(\textcolor{stringliteral}{"Total run distance: "} + stats.getTotalDistance());
-132             System.out.println(\textcolor{stringliteral}{"Average altitude gained: "} + stats.getMeanAltitudeAscended());
-133             System.out.println(\textcolor{stringliteral}{"Total altitude gained: "} + stats.getTotalAltitudeAscended());
-134             System.out.println(\textcolor{stringliteral}{"Average altitude lost: "} + stats.getMeanAltitudeDescended());
-135             System.out.println(\textcolor{stringliteral}{"Total altitude lost: "} + stats.getTotalAltitudeDescended());
-136         \}
-137         \textcolor{keywordflow}{else} \{
-138             System.out.println(\textcolor{stringliteral}{"RunStats is empty. No stats to show."});
-139         \}
-140 
-141         \textcolor{comment}{// Iteration 3 ends here}
-142 
-143     \}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{14                                            \{}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16         \textcolor{comment}{// Iteration 1 begins here}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         User john = \textcolor{keyword}{null};}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         DBManager dbManager = \textcolor{keyword}{new} DBManager();}
+\DoxyCodeLine{21         \textcolor{keywordflow}{if} (!dbManager.init(\textcolor{stringliteral}{"data.db"})) \{}
+\DoxyCodeLine{22             System.err.println(\textcolor{stringliteral}{"Failed to initialize DBManager"});}
+\DoxyCodeLine{23             System.exit(1);}
+\DoxyCodeLine{24         \}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         System.out.println(\textcolor{stringliteral}{"Attempting to create user..."});}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         \textcolor{keywordflow}{if} (!dbManager.userExists(\textcolor{stringliteral}{"jdoe@mac.com"})) \{}
+\DoxyCodeLine{29             Date dob = \textcolor{keyword}{null};}
+\DoxyCodeLine{30             DateFormat sourceFormat = \textcolor{keyword}{new} SimpleDateFormat(\textcolor{stringliteral}{"dd-MM-yyyy"});}
+\DoxyCodeLine{31             \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{32                 dob = sourceFormat.parse(\textcolor{stringliteral}{"03-04-1978"});}
+\DoxyCodeLine{33             \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} ParseException e) \{}
+\DoxyCodeLine{34                 System.err.println(e.getMessage());}
+\DoxyCodeLine{35             \}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37             User.createUser(}
+\DoxyCodeLine{38                     dbManager,}
+\DoxyCodeLine{39                     \textcolor{stringliteral}{"John Doe"},}
+\DoxyCodeLine{40                     \textcolor{stringliteral}{"jdoe@mac.com"},}
+\DoxyCodeLine{41                     dob,}
+\DoxyCodeLine{42                     User.Sex.MALE,}
+\DoxyCodeLine{43                     1.6764f,}
+\DoxyCodeLine{44                     54.4310844f,}
+\DoxyCodeLine{45                     \textcolor{stringliteral}{"My Very Secure Password"}}
+\DoxyCodeLine{46             );}
+\DoxyCodeLine{47         \}}
+\DoxyCodeLine{48         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{49             System.out.println(\textcolor{stringliteral}{"User already exists."});}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53         \textcolor{keywordflow}{if} (dbManager.userExists(\textcolor{stringliteral}{"jdoe@mac.com"}))}
+\DoxyCodeLine{54             System.out.println(\textcolor{stringliteral}{"John Doe was created!"});}
+\DoxyCodeLine{55         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{56             System.out.println(\textcolor{stringliteral}{"User was NOT created."});}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59         System.out.println(\textcolor{stringliteral}{"Testing incorrect password..."});}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{62             john = \textcolor{keyword}{new} User(dbManager,\textcolor{stringliteral}{"jdoe@mac.com"}, \textcolor{stringliteral}{"Some Incorrect Password"});}
+\DoxyCodeLine{63         \}}
+\DoxyCodeLine{64         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} AuthenticationException e) \{}
+\DoxyCodeLine{65             System.out.println(\textcolor{stringliteral}{"Incorrect password used; authentication failed."});}
+\DoxyCodeLine{66         \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68         System.out.println(\textcolor{stringliteral}{"Authenticating user..."});}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{71             john = \textcolor{keyword}{new} User(dbManager,\textcolor{stringliteral}{"jdoe@mac.com"}, \textcolor{stringliteral}{"My Very Secure Password"});}
+\DoxyCodeLine{72         \}}
+\DoxyCodeLine{73         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} AuthenticationException e) \{}
+\DoxyCodeLine{74             System.out.println(\textcolor{stringliteral}{"Test failed; user could not be authenticated."});}
+\DoxyCodeLine{75         \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77         \textcolor{comment}{// Iteration 1 ended here}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79         \textcolor{comment}{// Iteration 2 begins here}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81         \textcolor{keywordflow}{if} (john !=  \textcolor{keyword}{null}) \{}
+\DoxyCodeLine{82             Date today = \textcolor{keyword}{new} Date();}
+\DoxyCodeLine{83             \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{84                 Run.bulkImport(dbManager, john, \textcolor{stringliteral}{"/Users/jacobhouse/Google Drive File Stream/My Drive/Documents/Courses/Computer Science/COMP-2005 Software Engineering/Final Project/comp2005-activity-tracker/app/InputWO.csv"});}
+\DoxyCodeLine{85             \}}
+\DoxyCodeLine{86             \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} IOException e) \{}
+\DoxyCodeLine{87                 System.err.println(e.getMessage());}
+\DoxyCodeLine{88             \}}
+\DoxyCodeLine{89         \}}
+\DoxyCodeLine{90         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{91             System.out.println(\textcolor{stringliteral}{"John is null. Cannot execute phase 2."});}
+\DoxyCodeLine{92         \}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94         \textcolor{comment}{// Iteration 2 ends here}}
+\DoxyCodeLine{95         \textcolor{comment}{// Iteration 3 begins here}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         Date date = \textcolor{keyword}{null};}
+\DoxyCodeLine{98         DateFormat sourceFormat = \textcolor{keyword}{new} SimpleDateFormat(\textcolor{stringliteral}{"dd-MM-yyyy"});}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{101             date = sourceFormat.parse(\textcolor{stringliteral}{"01-01-2018"});}
+\DoxyCodeLine{102         \}}
+\DoxyCodeLine{103         \textcolor{keywordflow}{catch} (\textcolor{keyword}{final} ParseException e) \{}
+\DoxyCodeLine{104             System.err.println(e.getMessage());}
+\DoxyCodeLine{105         \}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107         Vector<Run> runs = Run.getRuns(dbManager, john, date, \textcolor{keyword}{new} Date());}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109         \textcolor{keywordflow}{if} (runs == \textcolor{keyword}{null}) \{}
+\DoxyCodeLine{110             System.out.println(\textcolor{stringliteral}{"Runs is null."});}
+\DoxyCodeLine{111         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (runs.size() == 0)}
+\DoxyCodeLine{112             System.err.println(\textcolor{stringliteral}{"No runs in vector."});}
+\DoxyCodeLine{113         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{114             \textcolor{keywordflow}{for} (Run run : runs) \{}
+\DoxyCodeLine{115                 System.out.println(\textcolor{stringliteral}{"Retrieved run with ID "} + Integer.toString(run.getID()));}
+\DoxyCodeLine{116                 System.out.println(\textcolor{stringliteral}{"Run duration: "} + Float.toString(run.getDuration()));}
+\DoxyCodeLine{117                 System.out.println(\textcolor{stringliteral}{"Run distance: "} + Float.toString(run.getDistance()));}
+\DoxyCodeLine{118                 System.out.println(\textcolor{stringliteral}{"Run speed: "} + Float.toString(run.getSpeed()));}
+\DoxyCodeLine{119                 System.out.println(\textcolor{stringliteral}{"Run altitude ascended: "} + run.getAltitudeAscended());}
+\DoxyCodeLine{120                 System.out.println(\textcolor{stringliteral}{"Run altitude descended: "} + run.getAltitudeDescended());}
+\DoxyCodeLine{121                 System.out.println(\textcolor{stringliteral}{"Run date: "} + run.getRunDate().toString());}
+\DoxyCodeLine{122                 System.out.println();}
+\DoxyCodeLine{123             \}}
+\DoxyCodeLine{124         \}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126         RunStats stats = \textcolor{keyword}{new} RunStats(runs);}
+\DoxyCodeLine{127         \textcolor{keywordflow}{if} (!stats.isEmpty()) \{}
+\DoxyCodeLine{128             System.out.println(\textcolor{stringliteral}{"Average run speed: "} + stats.getMeanSpeed());}
+\DoxyCodeLine{129             System.out.println(\textcolor{stringliteral}{"Average run duration: "} + stats.getMeanDuration());}
+\DoxyCodeLine{130             System.out.println(\textcolor{stringliteral}{"Average run distance: "} + stats.getMeanDistance());}
+\DoxyCodeLine{131             System.out.println(\textcolor{stringliteral}{"Total run distance: "} + stats.getTotalDistance());}
+\DoxyCodeLine{132             System.out.println(\textcolor{stringliteral}{"Average altitude gained: "} + stats.getMeanAltitudeAscended());}
+\DoxyCodeLine{133             System.out.println(\textcolor{stringliteral}{"Total altitude gained: "} + stats.getTotalAltitudeAscended());}
+\DoxyCodeLine{134             System.out.println(\textcolor{stringliteral}{"Average altitude lost: "} + stats.getMeanAltitudeDescended());}
+\DoxyCodeLine{135             System.out.println(\textcolor{stringliteral}{"Total altitude lost: "} + stats.getTotalAltitudeDescended());}
+\DoxyCodeLine{136         \}}
+\DoxyCodeLine{137         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{138             System.out.println(\textcolor{stringliteral}{"RunStats is empty. No stats to show."});}
+\DoxyCodeLine{139         \}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141         \textcolor{comment}{// Iteration 3 ends here}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143     \}}
+
 \end{DoxyCode}
 
 
